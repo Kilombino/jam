@@ -305,6 +305,15 @@ export const EarnPage = ({ walletFileName }: EarnPageProps) => {
         </>
       )}
 
+      {/* XBT: takers use only makers with a fidelity bond (bondless_makers_allowance = 0). */}
+      {!hasFidelityBond && (
+        <Alert variant="warning" className="my-2">
+          <InfoIcon />
+          <AlertTitle>{t('earn.alert_no_fidelity_bond_title')}</AlertTitle>
+          <AlertDescription>{t('earn.alert_no_fidelity_bond_description')}</AlertDescription>
+        </Alert>
+      )}
+
       {jmSession.offer_list && jmSession.offer_list.length > 0 && (
         <OfferCard
           className="motion-safe:animate-in blur-in"

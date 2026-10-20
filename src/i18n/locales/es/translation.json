@@ -671,7 +671,7 @@
     "title_fidelity_bonds_one": "Tu bono de fidelidad",
     "title_fidelity_bonds_other": "Tus bonos de fidelidad",
     "title_fidelity_bonds_many": "Tus bonos de fidelidad",
-    "subtitle_fidelity_bonds": "Un bono de fidelidad es un depósito a largo plazo que encarece a propósito las identidades criptográficas. Al bloquear fondos criptográficamente durante un tiempo, demuestras que vas en serio en el mercado y aumentas la probabilidad de que acepten tus ofertas.",
+    "subtitle_fidelity_bonds": "Un bono de fidelidad es un depósito a largo plazo que encarece a propósito las identidades criptográficas. En Bitcoin BLAKE2b es obligatorio para ganar: los takers solo eligen makers con bono, y cuanto mayor y más largo es el bono, más veces te eligen. Las monedas bloqueadas no se pueden mover antes de que venza el bono.",
     "fidelity_bond": {
       "error_unfreezing_utxos": "No se han podido descongelar los UTXOs.",
       "error_bond_not_in_jar": "El UTXO del bono de fidelidad ya no está en este bote. Recarga la cartera y vuelve a intentarlo.",
@@ -792,7 +792,9 @@
           "title": "Confirmar desbloqueo del bono de fidelidad vencido"
         }
       }
-    }
+    },
+    "alert_no_fidelity_bond_title": "Sin bono de fidelidad nadie aceptará tu oferta",
+    "alert_no_fidelity_bond_description": "En Bitcoin BLAKE2b los takers solo eligen makers que tienen un bono de fidelidad. Crea uno aquí abajo para ganar: bloquea las monedas que metas en él hasta la fecha que elijas, y no se pueden mover antes."
   },
   "cheatsheet": {
     "title": "La chuleta",
