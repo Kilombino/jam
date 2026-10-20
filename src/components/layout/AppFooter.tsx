@@ -4,6 +4,7 @@ import { useTranslation, Trans } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import { JmWebsocketInfo } from '@/components/ui/jam/JmWebsocketInfo'
 import { JAM_REPO_URL } from '@/constants/jam'
+import { XBT_CHAIN_LABEL } from '@/constants/xbt'
 import type { JmWebsocket } from '@/hooks/useJmWebsocket'
 import { BetaWarningDialog } from './footer/BetaWarningDialog'
 
@@ -98,6 +99,9 @@ export function AppFooter({
                   </span>
                 </span>
               )}
+              <span className="font-semibold" data-testid="xbt-chain-label">
+                {XBT_CHAIN_LABEL}
+              </span>
               <a
                 href={`${JAM_REPO_URL}/tags`}
                 target="_blank"

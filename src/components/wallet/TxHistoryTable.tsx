@@ -8,11 +8,12 @@ import {
   type SortingState,
 } from '@tanstack/react-table'
 import type { TFunction } from 'i18next'
-import { CheckIcon, ChevronDownIcon, CopyIcon } from 'lucide-react'
+import { CheckIcon, ChevronDownIcon, CopyIcon, ExternalLinkIcon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { TablePagination } from '@/components/ui/jam/TablePagination'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { xbtExplorerTxUrl } from '@/constants/xbt'
 import type { HistoryEntry } from '@/hooks/useQueryWalletHistory'
 import { cn, shortenStringMiddle } from '@/lib/utils'
 import { Alert, AlertDescription } from '../ui/alert'
@@ -100,7 +101,7 @@ const TxHistoryTableRow = ({ row }: { row: Row<typeof txHistoryTableFeatures, Hi
   )
 }
 
-const txHistoryTableColumns = (t: TFunction) =>
+const txHistoryTableColumns = (t: TFunction, network: string | null) =>
   columnHelper.columns([
     columnHelper.accessor('timestamp', {
       header: () => t('tx_history.column_title_date'),
@@ -162,6 +163,17 @@ const txHistoryTableColumns = (t: TFunction) =>
               onSuccess={() => toast.success(t('tx_history.copy_txid_success'))}
               onError={() => toast.error(t('tx_history.copy_txid_error'))}
             />
+            {xbtExplorerTxUrl(txid, network) && (
+              <a
+                href={xbtExplorerTxUrl(txid, network)}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="mempool.kilombino.com"
+                className={cn(buttonVariants({ variant: 'outline', size: 'icon-xs' }), 'shrink-0')}
+              >
+                <ExternalLinkIcon />
+              </a>
+            )}
           </div>
         ) : (
           ''
@@ -192,9 +204,10 @@ const txHistoryTableColumns = (t: TFunction) =>
 interface TxHistoryTableProps {
   history: HistoryEntry[]
   compact?: boolean
+  network?: string | null
 }
 
-export const TxHistoryTable = ({ history, compact = false }: TxHistoryTableProps) => {
+export const TxHistoryTable = ({ history, compact = false, network = null }: TxHistoryTableProps) => {
   const { t } = useTranslation()
   const [sorting, setSorting] = useState<SortingState>([{ id: 'timestamp', desc: true }])
   const [isShowAll, setIsShowAll] = useState(false)
@@ -203,7 +216,7 @@ export const TxHistoryTable = ({ history, compact = false }: TxHistoryTableProps
     pageSize: compact ? 5 : ITEMS_PER_PAGE,
   })
 
-  const columns = useMemo(() => txHistoryTableColumns(t), [t])
+  const columns = useMemo(() => txHistoryTableColumns(t, network), [t, network])
 
   const { setPageSize, setPageIndex, getPageCount, getFilteredRowModel, ...table } = useTable({
     features: txHistoryTableFeatures,

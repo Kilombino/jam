@@ -20,6 +20,14 @@ interface TxHistoryContentProps {
   onViewAll?: () => void
 }
 
+const useSafeDetectedNetwork = () => {
+  try {
+    return useJamWalletInfoContext()?.detectedNetwork ?? null
+  } catch {
+    return null
+  }
+}
+
 const useSafeUtxosHashHex = () => {
   try {
     const context = useJamWalletInfoContext()
@@ -41,6 +49,7 @@ export const TxHistoryContent = ({
   const [limit, setLimit] = useState(initialLimit)
   const { enabled: isDeveloperMode } = useDeveloperMode()
   const [demoEntries, setDemoEntries] = useState<HistoryEntry[]>([])
+  const detectedNetwork = useSafeDetectedNetwork()
   const utxosHashHex = useSafeUtxosHashHex()
 
   const {
@@ -120,7 +129,11 @@ export const TxHistoryContent = ({
           <AlertDescription>{t('tx_history.error_loading')}</AlertDescription>
         </Alert>
       ) : (
-        <TxHistoryTable history={compact ? combinedHistory.slice(0, 5) : combinedHistory} compact={compact} />
+        <TxHistoryTable
+          history={compact ? combinedHistory.slice(0, 5) : combinedHistory}
+          compact={compact}
+          network={detectedNetwork}
+        />
       )}
 
       {!compact && combinedHistory.length >= limit ? (
