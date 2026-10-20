@@ -1,5 +1,6 @@
 import de from './locales/de/translation.json'
 import en from './locales/en/translation.json'
+import es from './locales/es/translation.json'
 import fr from './locales/fr/translation.json'
 import it from './locales/it/translation.json'
 import pt_BR from './locales/pt_BR/translation.json'
@@ -12,6 +13,11 @@ const languages = [
     key: 'en',
     description: 'English',
     translation: en,
+  },
+  {
+    key: 'es',
+    description: 'Español',
+    translation: es,
   },
   {
     key: 'fr',

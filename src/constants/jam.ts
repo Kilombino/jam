@@ -28,8 +28,12 @@ export const JAM_MATRIX_URL: string = (import.meta.env.VITE_JAM_MATRIX_URL || JA
 const JAM_TELEGRAM_URL_DEFAULT: string = 'https://t.me/JoinMarketWebUI'
 export const JAM_TELEGRAM_URL: string = (import.meta.env.VITE_JAM_TELEGRAM_URL || JAM_TELEGRAM_URL_DEFAULT) as string
 
-const JAM_JMNG_REPO_URL_DEFAULT: string = 'https://github.com/joinmarket-ng/joinmarket-ng'
+// XBT build: the backend is the XBT fork of JoinMarket-NG; bugs go there.
+const JAM_JMNG_REPO_URL_DEFAULT: string = 'https://github.com/Kilombino/joinmarket-ng'
 export const JAM_JMNG_REPO_URL: string = (import.meta.env.VITE_JAM_JMNG_REPO_URL || JAM_JMNG_REPO_URL_DEFAULT) as string
+
+const JAM_ISSUES_URL_DEFAULT: string = 'https://github.com/Kilombino/joinmarket-ng/issues'
+export const JAM_ISSUES_URL: string = (import.meta.env.VITE_JAM_ISSUES_URL || JAM_ISSUES_URL_DEFAULT) as string
 
 export const JAM_JM_RETRIES_DOCS_URL =
   'https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/SOURCING-COMMITMENTS.md'

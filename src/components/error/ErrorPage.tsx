@@ -3,7 +3,7 @@ import { Trans, useTranslation } from 'react-i18next'
 import { useRouteError } from 'react-router-dom'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import PageTitle from '@/components/ui/jam/PageTitle'
-import { JAM_REPO_URL } from '@/constants/jam'
+import { JAM_ISSUES_URL } from '@/constants/jam'
 
 interface ErrorViewProps {
   title: string
@@ -20,7 +20,7 @@ function ErrorView({ title, subtitle, reason, stacktrace }: ErrorViewProps) {
         <Trans i18nKey="error_page.report_bug">
           Please{' '}
           <a
-            href={`${JAM_REPO_URL}/issues/new?labels=bug&template=bug_report.md`}
+            href={`${JAM_ISSUES_URL}/new`}
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold underline hover:no-underline"

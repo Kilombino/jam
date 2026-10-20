@@ -33,7 +33,13 @@ import PageTitle from '@/components/ui/jam/PageTitle'
 import { Separator } from '@/components/ui/separator'
 import { Spinner } from '@/components/ui/spinner'
 import { isDebugFeatureEnabled, isDevMode } from '@/constants/debugFeatures'
-import { JAM_DOCS_URL, JAM_MATRIX_URL, JAM_REPO_URL, JAM_SEED_MODAL_TIMEOUT, JAM_TELEGRAM_URL } from '@/constants/jam'
+import {
+  JAM_DOCS_URL,
+  JAM_JMNG_REPO_URL,
+  JAM_MATRIX_URL,
+  JAM_SEED_MODAL_TIMEOUT,
+  JAM_TELEGRAM_URL,
+} from '@/constants/jam'
 import { routes } from '@/constants/routes'
 import { useJamDisplayContext } from '@/context/JamDisplayContext'
 import { useFeatures } from '@/hooks/useFeatures'
@@ -272,7 +278,7 @@ export const SettingsBasicContent = ({ walletFileName, onLockWallet }: SettingBa
           <SettingsLink
             renderIcon={({ className }) => <GitHubIcon className={className} />}
             title={t('settings.github')}
-            to={JAM_REPO_URL}
+            to={JAM_JMNG_REPO_URL}
             external={true}
           />
         </CardContent>

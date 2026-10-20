@@ -30,4 +30,10 @@ describe('i18n config', () => {
     expect(i18n.t('global.cancel')).toBe('Abbrechen')
     expect(document.documentElement.lang).toBe('de-AT')
   })
+
+  it('offers Spanish for Spanish browsers (es-ES)', async () => {
+    await i18n.changeLanguage('es-ES')
+    expect(i18n.t('global.cancel')).toBe('Cancelar')
+    await i18n.changeLanguage('en')
+  })
 })

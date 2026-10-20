@@ -1027,5 +1027,11 @@
     "label_role_taker": "Taker",
     "label_role_send": "Send",
     "label_role_deposit": "Deposit"
+  },
+  "beta_header": {
+    "badge": "Beta",
+    "title": "Thanks for testing!",
+    "text": "Please report anything that looks off.",
+    "button_report_bug": "I found a bug"
   }
 }

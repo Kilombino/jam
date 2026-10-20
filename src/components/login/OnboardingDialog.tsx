@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { JAM_DOCS_URL, JAM_JMNG_REPO_URL, JAM_REPO_URL } from '@/constants/jam'
+import { JAM_DOCS_URL, JAM_ISSUES_URL, JAM_JMNG_REPO_URL } from '@/constants/jam'
 import { cn } from '@/lib/utils'
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 
@@ -130,7 +130,7 @@ export const OnboardingDialog = ({ open, onOpenChange }: OnboardingDialogProps) 
                     components={{
                       '1': (
                         <a
-                          href={`${JAM_REPO_URL}/issues`}
+                          href={JAM_ISSUES_URL}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="font-semibold underline underline-offset-4"
