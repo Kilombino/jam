@@ -4,9 +4,10 @@
  * jmwalletd builds it (GET /wallet/{walletname}/watch-export) so the browser
  * never needs the seed: the five jar account keys (BIP84 m/84'/coin'/N') and
  * the wallet's own fidelity bonds as [timenumber, locktime], the bond key being
- * m/84'/coin'/0'/2/<timenumber>. No private keys.
+ * m/84'/coin'/0'/2/<timenumber>, and the master key fingerprint that signers
+ * look for in a PSBT. No private keys.
  *
- *   kilowallet-jm:v1:{"n":"mainnet","x":["zpub…",…],"b":[[82,1793491200],…]}
+ *   kilowallet-jm:v1:{"n":"mainnet","x":["zpub…",…],"b":[[82,1793491200],…],"f":"73c5da0a"}
  */
 export const KILOWALLET_EXPORT_PREFIX = 'kilowallet-jm:v1:'
 
@@ -14,6 +15,7 @@ export interface WatchExportResponse {
   network: string
   xpubs: string[]
   bonds: Array<[number, number]>
+  fingerprint?: string
   export: string
 }
 
