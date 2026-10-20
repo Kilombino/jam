@@ -21,6 +21,7 @@ import {
   LanguagesIcon,
   FlaskConicalIcon,
   PenLineIcon,
+  ScanEyeIcon,
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useTranslation } from 'react-i18next'
@@ -51,6 +52,7 @@ import { Badge } from '../ui/badge'
 import { Address } from '../ui/jam/Address'
 import { Tabs, TabsList, TabsTrigger } from '../ui/tabs'
 import { AccountXpubsDialog } from './AccountXpubsDialog'
+import { KilowalletWatchDialog } from './KilowalletWatchDialog'
 import { SeedPhraseDialog } from './SeedPhraseDialog'
 import { SettingsItem, SettingsLink, SettingsSwitch } from './SettingsItem'
 import { SignMessageDialog } from './SignMessageDialog'
@@ -104,6 +106,7 @@ export const SettingsBasicContent = ({ walletFileName, onLockWallet }: SettingBa
 
   const [showSeedDialog, setShowSeedDialog] = useState(false)
   const [showXpubsDialog, setShowXpubsDialog] = useState(false)
+  const [showKilowalletDialog, setShowKilowalletDialog] = useState(false)
   const [showFeeConfigDialog, setShowFeeConfigDialog] = useState(false)
   const hashedPassword = useStore(authStore, (state) => state.state?.hashed_password)
   const { isFeatureEnabled } = useFeatures()
@@ -122,6 +125,12 @@ export const SettingsBasicContent = ({ walletFileName, onLockWallet }: SettingBa
         feeConfigValidation={feeConfigValidation}
         open={showFeeConfigDialog}
         onOpenChange={setShowFeeConfigDialog}
+      />
+
+      <KilowalletWatchDialog
+        walletFileName={walletFileName}
+        open={showKilowalletDialog}
+        onOpenChange={setShowKilowalletDialog}
       />
 
       {hashedPassword && (
@@ -210,6 +219,12 @@ export const SettingsBasicContent = ({ walletFileName, onLockWallet }: SettingBa
             title={t('settings.show_xpubs')}
             action={() => setShowXpubsDialog(true)}
             disabled={hashedPassword === undefined}
+          />
+          <Separator className="opacity-50" />
+          <SettingsItem
+            icon={ScanEyeIcon}
+            title={t('settings.show_kilowallet')}
+            action={() => setShowKilowalletDialog(true)}
           />
           <Separator className="opacity-50" />
           <SettingsItem

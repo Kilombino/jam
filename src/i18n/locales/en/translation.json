@@ -320,6 +320,7 @@
     "label_select_language_aria_label": "$t(settings.label_select_language_title)",
     "show_seed": "Show seed phrase",
     "show_xpubs": "Show account xpubs",
+    "show_kilowallet": "View in Kilowallet (read-only)",
     "sign_message": "Sign message",
     "sign_message_modal": {
       "title": "Sign Message",
@@ -381,6 +382,21 @@
       "text_info_message": "Account-level extended public keys can be imported into watch-only wallets for monitoring. They reveal all addresses in the derivation path. Share them with caution.",
       "button_copy_title": "Copy Extended Public Key for {{account}}",
       "button_reveal_xpub_qrcode": "Reveal QR-Code"
+    },
+    "kilowallet_modal": {
+      "title": "View in Kilowallet (read-only)",
+      "subtitle": "Scan this QR code with Kilowallet (or copy the text) to follow this wallet from your phone: the balance and movements of the five jars and your fidelity bonds, with alerts when a bond unlocks. It contains no private key: Kilowallet can watch, never spend.",
+      "text_info_title": "Keep in mind",
+      "text_info_message": "Anyone with this export can see every address, balance and bond of this wallet. Share it only with your own phone.",
+      "text_test_network": "This export is for {{network}}. Kilowallet only watches XBT mainnet wallets.",
+      "text_no_bonds": "No fidelity bonds yet.",
+      "text_bonds_one": "{{count}} fidelity bond (unlocks {{months}}).",
+      "text_bonds_other": "{{count}} fidelity bonds (unlock {{months}}).",
+      "button_copy": "Copy the export",
+      "text_copied": "Copied the Kilowallet export to clipboard!",
+      "button_reveal_qrcode": "Reveal QR-Code",
+      "text_regenerate": "Created a new fidelity bond? Open this again and import it in Kilowallet again: it replaces the previous import with the full current set.",
+      "text_error_title": "Error while preparing the export"
     },
     "documentation": "Documentation",
     "github": "GitHub",

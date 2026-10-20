@@ -127,6 +127,15 @@ vi.mock('@/components/settings/AccountXpubsDialog', () => ({
     ) : null,
 }))
 
+vi.mock('./KilowalletWatchDialog', () => ({
+  KilowalletWatchDialog: ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) =>
+    open ? (
+      <button type="button" onClick={() => onOpenChange(false)}>
+        kilowallet-dialog
+      </button>
+    ) : null,
+}))
+
 vi.mock('./SignMessageDialog', () => ({
   SignMessageDialog: ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) =>
     open ? (
@@ -244,6 +253,10 @@ describe('SettingsPage', () => {
 
     clickItem('settings.show_fee_config')
     expect(screen.getByText('fee-config-dialog')).toBeInTheDocument()
+
+    // Read-only export for Kilowallet: no password needed, it holds no private key.
+    clickItem('settings.show_kilowallet')
+    expect(screen.getByText('kilowallet-dialog')).toBeInTheDocument()
   })
 
   it('opens basic, protected wallet dialogs and locks the wallet when a password is available', async () => {

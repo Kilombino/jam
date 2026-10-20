@@ -320,6 +320,7 @@
     "label_select_language_aria_label": "$t(settings.label_select_language_title)",
     "show_seed": "Ver frase de recuperación",
     "show_xpubs": "Ver xpubs de las cuentas",
+    "show_kilowallet": "Ver en Kilowallet (solo lectura)",
     "sign_message": "Firmar mensaje",
     "sign_message_modal": {
       "title": "Firmar mensaje",
@@ -381,6 +382,21 @@
       "text_info_message": "Las claves públicas extendidas de cuenta se pueden importar en carteras de solo lectura para vigilarlas. Revelan todas las direcciones de la ruta de derivación. Compártelas con cuidado.",
       "button_copy_title": "Copiar clave pública extendida de {{account}}",
       "button_reveal_xpub_qrcode": "Mostrar código QR"
+    },
+    "kilowallet_modal": {
+      "title": "Ver en Kilowallet (solo lectura)",
+      "subtitle": "Escanea este código QR con Kilowallet (o copia el texto) para seguir esta cartera desde el móvil: el saldo y los movimientos de los cinco botes y tus fidelity bonds, con avisos cuando un bond se desbloquea. No contiene ninguna clave privada: Kilowallet puede mirar, nunca gastar.",
+      "text_info_title": "Ten en cuenta",
+      "text_info_message": "Quien tenga esta exportación puede ver todas las direcciones, saldos y bonds de esta cartera. Compártela solo con tu propio móvil.",
+      "text_test_network": "Esta exportación es de {{network}}. Kilowallet solo vigila carteras de XBT mainnet.",
+      "text_no_bonds": "Todavía no hay fidelity bonds.",
+      "text_bonds_one": "{{count}} fidelity bond (se desbloquea {{months}}).",
+      "text_bonds_other": "{{count}} fidelity bonds (se desbloquean {{months}}).",
+      "button_copy": "Copiar la exportación",
+      "text_copied": "¡Exportación para Kilowallet copiada al portapapeles!",
+      "button_reveal_qrcode": "Mostrar código QR",
+      "text_regenerate": "¿Has creado un fidelity bond nuevo? Vuelve a abrir esto e impórtalo otra vez en Kilowallet: sustituye a la importación anterior con el conjunto completo actual.",
+      "text_error_title": "Error al preparar la exportación"
     },
     "documentation": "Documentación",
     "github": "GitHub",
