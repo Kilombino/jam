@@ -31,7 +31,7 @@ What this Jam adds on top of upstream Jam `v2.0.0-beta.4` (7 commits): the "Bitc
 You need a synced **Bitcoin Knots BLAKE2b** node (29.4.3 or later).
 
 - **StartOS:** add the registry `https://registry.kilombino.com` and install *JoinBlaket*.
-- **Umbrel** (umbrelOS 1.3+): add the community stores `https://github.com/paulscode/umbrel-store` (node) and `https://github.com/Kilombino/umbrel-store` (Jam).
+- **Umbrel** (umbrelOS 1.3+): add the community stores `https://github.com/paulscode/umbrel-store` (node) and `https://github.com/Kilombino/umbrel-store` (JoinBlaket).
 - **Docker:** `ghcr.io/kilombino/jam-xbt:0.43.0-xbt1`, index digest `sha256:4b08cd111b37c2181d193ef8a2e6ec764da059a81b81fb40ab247e942bd760ef`. Guide: [TUTORIAL-LINUX-ES.md](https://github.com/Kilombino/joinblaket/blob/xbt/TUTORIAL-LINUX-ES.md).
 - **Native, Minibolt style** (venv + hardened systemd + Jam built by you): in testing, see [kilombino.com/jam](https://kilombino.com/jam/).
 
