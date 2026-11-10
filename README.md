@@ -1,6 +1,63 @@
-<p align="center"><img src="docs/assets/jam-xbt-logo.jpg" alt="Jam for Bitcoin (BLAKE2b)" width="260"></p>
+<p align="center"><img src="docs/assets/jam-xbt-logo.jpg" alt="JoinBlaket + Jam" width="260"></p>
 
-<p align="center"><strong>Jam for Bitcoin (BLAKE2b)</strong>: this fork runs on the BLAKE2b chain together with <a href="https://github.com/Kilombino/joinmarket-ng">Kilombino/joinmarket-ng</a> (branch <code>xbt</code>). Install guides for Linux, StartOS and Umbrel are in that repo.</p>
+<h1 align="center">JoinBlaket + Jam</h1>
+
+<p align="center"><strong>CoinJoin on Bitcoin (BLAKE2b)</strong> · Jam <code>v2.0.0-beta.4-xbt3</code> · JoinBlaket <code>0.41.0-xbt3</code></p>
+
+**JoinBlaket** is JoinMarket adapted to the Bitcoin (BLAKE2b) chain: the fork [Kilombino/joinmarket-ng](https://github.com/Kilombino/joinmarket-ng) (branch `xbt`), a small, auditable patch on top of JoinMarket-NG. **Jam** (this repo) is its web wallet. Together they let you CoinJoin: mix your coins with other people's to gain privacy. It only works on BLAKE2b and refuses to start against a node on the SHA-256 chain (Spamchain).
+
+The code and the Docker image are still called `joinmarket-ng` and `jam-xbt`.
+
+Full step-by-step guide (Spanish): **[kilombino.com/jam](https://kilombino.com/jam/)**
+
+### What changes compared to JoinMarket
+
+| What | In this fork | Why |
+|---|---|---|
+| Network on the wire | announces and requires `"xbt"`; rejects `"mainnet"` directories and peers | otherwise a BLAKE2b wallet would join the SHA-256 market (and vice versa) |
+| Signatures | every signature uses the unified sighash `0x21`, and only `0x21` is accepted from others | a `0x21` signature is only valid on BLAKE2b, so your transactions can't be replayed on the SHA-256 chain |
+| Node check | requires `difficulty_blake2b` and v2 headers before the first call | pointed at a SHA-256 node, it doesn't start (fails closed) |
+| Directory | one BLAKE2b meeting point (below); none built into the code | the built-in ones belong to the SHA-256 market |
+| Fees | only your node's `estimatesmartfee` | external sources look at the SHA-256 mempool and leak data |
+| Makers | takers only mix with makers that hold a **fidelity bond**, at least 4 | a sybil attack costs more in a young market |
+| Backend | `descriptor_wallet` only (no Neutrino) | Neutrino can't tell which chain it is on |
+
+The directory is `f3tfzgk5ilwfapx427yx5ckeh7ptuvskfxnfnicfo747jyq5mgzdtvad.onion:5222`, with verified nick authentication (`require_verified`) so nobody can impersonate a maker. It comes preconfigured in StartOS, Umbrel and Docker. Addresses are still `bc1…` and paths `m/84'/0'/…`. Technical detail: [XBT.md](https://github.com/Kilombino/joinmarket-ng/blob/xbt/XBT.md).
+
+What this Jam adds on top of upstream Jam `v2.0.0-beta.4` (7 commits): the "Bitcoin BLAKE2b" label, transaction links to [mempool.kilombino.com](https://mempool.kilombino.com), Spanish translation, a warning in Earn that offers without a fidelity bond are never taken, the app icon, and **View in Kilowallet** (read-only QR export of the wallet).
+
+### Install
+
+You need a synced **Bitcoin Knots BLAKE2b** node (29.4.3 or later).
+
+- **StartOS:** add the registry `https://registry.kilombino.com` and install *JoinMarket XBT (Jam)*.
+- **Umbrel** (umbrelOS 1.3+): add the community stores `https://github.com/paulscode/umbrel-store` (node) and `https://github.com/Kilombino/umbrel-store` (Jam).
+- **Docker:** `ghcr.io/kilombino/jam-xbt:0.41.0-xbt3`, index digest `sha256:e16139b50d14068d32d14af1c0d2b20358b16359786224ac62e252cfda87b69a`. Guide: [TUTORIAL-LINUX-ES.md](https://github.com/Kilombino/joinmarket-ng/blob/xbt/TUTORIAL-LINUX-ES.md).
+- **Native, Minibolt style** (venv + hardened systemd + Jam built by you): in testing, see [kilombino.com/jam](https://kilombino.com/jam/).
+
+Upstream JoinMarket-NG has since released 0.42.x and 0.43.0 (denial-of-service and wallet daemon fixes). `0.43.0-xbt1` is being prepared; until then, use **small amounts**.
+
+### Verify what you run
+
+| | |
+|---|---|
+| JoinBlaket tag | `v0.41.0-xbt3` → `87fa931a77438e551e17c31b2a3d245ac952a765` |
+| Jam tag | `v2.0.0-beta.4-xbt3` → `a843bb1ed57b3bf4bf94c4ebdfb4d3c08577c978` |
+| Jam build | Node `v26.7.0`, `npm ci --ignore-scripts && npm run build`, then `tar --sort=name --mtime='@0' --owner=0 --group=0 --numeric-owner --mode=go-w -C dist -cf - . \| sha256sum` → `21bb92c2c897d7d658519da065af4d59280214c51575b77b803cb5c6ebf4f345` |
+
+The Docker image is reproducible: building it from these two tags (`xbt-docker/build.sh` in JoinBlaket) gives the published image bit for bit. Every signature in a JoinBlaket transaction ends in `21`; check it on mempool.kilombino.com or with `scripts/xbt/verify_coinjoin_tx.py`.
+
+### Security, in short
+
+- Always a Knots BLAKE2b node: the fork refuses to start with anything else.
+- Use a **new seed** created in Jam. Never import a wallet you used on the SHA-256 chain.
+- Keep Jam on `127.0.0.1`. Don't open port 28183 to the Internet or use `--network host`.
+- Fidelity bonds lock your coins until the date you pick; they are created from the Jam wallet and signed with `0x21`. Bonds from hardware or cold wallets aren't supported yet.
+- Problems: [Kilombino/joinmarket-ng issues](https://github.com/Kilombino/joinmarket-ng/issues).
+
+---
+
+<p align="center"><em>Upstream Jam README below.</em></p>
 
 <div align="center">
   <img src="docs/assets/readme-header-light.svg#gh-light-mode-only" alt="Jam: Your sats. Your privacy. Your profit.">
