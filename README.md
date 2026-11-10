@@ -57,8 +57,6 @@ The Docker image is reproducible: building it from these two tags (`xbt-docker/b
 
 ---
 
-<p align="center"><em>Upstream Jam README below.</em></p>
-
 <div align="center">
   <img src="docs/assets/readme-header-light.svg#gh-light-mode-only" alt="Jam: Your sats. Your privacy. Your profit.">
   <img src="docs/assets/readme-header-dark.svg#gh-dark-mode-only" alt="Jam: Your sats. Your privacy. Your profit.">
