@@ -2,7 +2,7 @@
 
 <h1 align="center">JoinBlaket + Jam</h1>
 
-<p align="center"><strong>CoinJoin on Bitcoin (BLAKE2b)</strong> · Jam <code>v2.0.0-beta.4-xbt3</code> · JoinBlaket <code>0.41.0-xbt3</code></p>
+<p align="center"><strong>CoinJoin on Bitcoin (BLAKE2b)</strong> · Jam <code>v2.0.0-beta.4-xbt3</code> · JoinBlaket <code>0.43.0-xbt1</code></p>
 
 **JoinBlaket** is JoinMarket adapted to the Bitcoin (BLAKE2b) chain: the fork [Kilombino/joinblaket](https://github.com/Kilombino/joinblaket) (branch `xbt`), a small, auditable patch on top of JoinMarket-NG. **Jam** (this repo) is its web wallet. Together they let you CoinJoin: mix your coins with other people's to gain privacy. It only works on BLAKE2b and refuses to start against a node on the SHA-256 chain (Spamchain).
 
@@ -30,18 +30,18 @@ What this Jam adds on top of upstream Jam `v2.0.0-beta.4` (7 commits): the "Bitc
 
 You need a synced **Bitcoin Knots BLAKE2b** node (29.4.3 or later).
 
-- **StartOS:** add the registry `https://registry.kilombino.com` and install *JoinMarket XBT (Jam)*.
+- **StartOS:** add the registry `https://registry.kilombino.com` and install *JoinBlaket*.
 - **Umbrel** (umbrelOS 1.3+): add the community stores `https://github.com/paulscode/umbrel-store` (node) and `https://github.com/Kilombino/umbrel-store` (Jam).
-- **Docker:** `ghcr.io/kilombino/jam-xbt:0.41.0-xbt3`, index digest `sha256:e16139b50d14068d32d14af1c0d2b20358b16359786224ac62e252cfda87b69a`. Guide: [TUTORIAL-LINUX-ES.md](https://github.com/Kilombino/joinblaket/blob/xbt/TUTORIAL-LINUX-ES.md).
+- **Docker:** `ghcr.io/kilombino/jam-xbt:0.43.0-xbt1`, index digest `sha256:4b08cd111b37c2181d193ef8a2e6ec764da059a81b81fb40ab247e942bd760ef`. Guide: [TUTORIAL-LINUX-ES.md](https://github.com/Kilombino/joinblaket/blob/xbt/TUTORIAL-LINUX-ES.md).
 - **Native, Minibolt style** (venv + hardened systemd + Jam built by you): in testing, see [kilombino.com/jam](https://kilombino.com/jam/).
 
-Upstream JoinMarket-NG has since released 0.42.x and 0.43.0 (denial-of-service and wallet daemon fixes). `0.43.0-xbt1` is being prepared; until then, use **small amounts**.
+JoinBlaket `0.43.0-xbt1` is based on upstream JoinMarket-NG 0.43.0 (denial-of-service and wallet daemon fixes). Use **small amounts** while the market is young.
 
 ### Verify what you run
 
 | | |
 |---|---|
-| JoinBlaket tag | `v0.41.0-xbt3` → `87fa931a77438e551e17c31b2a3d245ac952a765` |
+| JoinBlaket tag | `v0.43.0-xbt1` → `9861e61e5baf99279040fbb31505144faffc222e` |
 | Jam tag | `v2.0.0-beta.4-xbt3` → `a843bb1ed57b3bf4bf94c4ebdfb4d3c08577c978` |
 | Jam build | Node `v26.7.0`, `npm ci --ignore-scripts && npm run build`, then `tar --sort=name --mtime='@0' --owner=0 --group=0 --numeric-owner --mode=go-w -C dist -cf - . \| sha256sum` → `21bb92c2c897d7d658519da065af4d59280214c51575b77b803cb5c6ebf4f345` |
 
