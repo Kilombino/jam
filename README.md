@@ -1,3 +1,7 @@
+<p align="center"><img src="docs/assets/jam-xbt-logo.jpg" alt="Jam for Bitcoin (BLAKE2b)" width="260"></p>
+
+<p align="center"><strong>Jam for Bitcoin (BLAKE2b)</strong>: this fork runs on the BLAKE2b chain together with <a href="https://github.com/Kilombino/joinmarket-ng">Kilombino/joinmarket-ng</a> (branch <code>xbt</code>). Install guides for Linux, StartOS and Umbrel are in that repo.</p>
+
 <div align="center">
   <img src="docs/assets/readme-header-light.svg#gh-light-mode-only" alt="Jam: Your sats. Your privacy. Your profit.">
   <img src="docs/assets/readme-header-dark.svg#gh-dark-mode-only" alt="Jam: Your sats. Your privacy. Your profit.">
