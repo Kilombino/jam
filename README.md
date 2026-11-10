@@ -4,7 +4,7 @@
 
 <p align="center"><strong>CoinJoin on Bitcoin (BLAKE2b)</strong> · Jam <code>v2.0.0-beta.4-xbt3</code> · JoinBlaket <code>0.41.0-xbt3</code></p>
 
-**JoinBlaket** is JoinMarket adapted to the Bitcoin (BLAKE2b) chain: the fork [Kilombino/joinmarket-ng](https://github.com/Kilombino/joinmarket-ng) (branch `xbt`), a small, auditable patch on top of JoinMarket-NG. **Jam** (this repo) is its web wallet. Together they let you CoinJoin: mix your coins with other people's to gain privacy. It only works on BLAKE2b and refuses to start against a node on the SHA-256 chain (Spamchain).
+**JoinBlaket** is JoinMarket adapted to the Bitcoin (BLAKE2b) chain: the fork [Kilombino/joinblaket](https://github.com/Kilombino/joinblaket) (branch `xbt`), a small, auditable patch on top of JoinMarket-NG. **Jam** (this repo) is its web wallet. Together they let you CoinJoin: mix your coins with other people's to gain privacy. It only works on BLAKE2b and refuses to start against a node on the SHA-256 chain (Spamchain).
 
 The code and the Docker image are still called `joinmarket-ng` and `jam-xbt`.
 
@@ -22,7 +22,7 @@ Full step-by-step guide (Spanish): **[kilombino.com/jam](https://kilombino.com/j
 | Makers | takers only mix with makers that hold a **fidelity bond**, at least 4 | a sybil attack costs more in a young market |
 | Backend | `descriptor_wallet` only (no Neutrino) | Neutrino can't tell which chain it is on |
 
-The directory is `f3tfzgk5ilwfapx427yx5ckeh7ptuvskfxnfnicfo747jyq5mgzdtvad.onion:5222`, with verified nick authentication (`require_verified`) so nobody can impersonate a maker. It comes preconfigured in StartOS, Umbrel and Docker. Addresses are still `bc1…` and paths `m/84'/0'/…`. Technical detail: [XBT.md](https://github.com/Kilombino/joinmarket-ng/blob/xbt/XBT.md).
+The directory is `f3tfzgk5ilwfapx427yx5ckeh7ptuvskfxnfnicfo747jyq5mgzdtvad.onion:5222`, with verified nick authentication (`require_verified`) so nobody can impersonate a maker. It comes preconfigured in StartOS, Umbrel and Docker. Addresses are still `bc1…` and paths `m/84'/0'/…`. Technical detail: [XBT.md](https://github.com/Kilombino/joinblaket/blob/xbt/XBT.md).
 
 What this Jam adds on top of upstream Jam `v2.0.0-beta.4` (7 commits): the "Bitcoin BLAKE2b" label, transaction links to [mempool.kilombino.com](https://mempool.kilombino.com), Spanish translation, a warning in Earn that offers without a fidelity bond are never taken, the app icon, and **View in Kilowallet** (read-only QR export of the wallet).
 
@@ -32,7 +32,7 @@ You need a synced **Bitcoin Knots BLAKE2b** node (29.4.3 or later).
 
 - **StartOS:** add the registry `https://registry.kilombino.com` and install *JoinMarket XBT (Jam)*.
 - **Umbrel** (umbrelOS 1.3+): add the community stores `https://github.com/paulscode/umbrel-store` (node) and `https://github.com/Kilombino/umbrel-store` (Jam).
-- **Docker:** `ghcr.io/kilombino/jam-xbt:0.41.0-xbt3`, index digest `sha256:e16139b50d14068d32d14af1c0d2b20358b16359786224ac62e252cfda87b69a`. Guide: [TUTORIAL-LINUX-ES.md](https://github.com/Kilombino/joinmarket-ng/blob/xbt/TUTORIAL-LINUX-ES.md).
+- **Docker:** `ghcr.io/kilombino/jam-xbt:0.41.0-xbt3`, index digest `sha256:e16139b50d14068d32d14af1c0d2b20358b16359786224ac62e252cfda87b69a`. Guide: [TUTORIAL-LINUX-ES.md](https://github.com/Kilombino/joinblaket/blob/xbt/TUTORIAL-LINUX-ES.md).
 - **Native, Minibolt style** (venv + hardened systemd + Jam built by you): in testing, see [kilombino.com/jam](https://kilombino.com/jam/).
 
 Upstream JoinMarket-NG has since released 0.42.x and 0.43.0 (denial-of-service and wallet daemon fixes). `0.43.0-xbt1` is being prepared; until then, use **small amounts**.
@@ -53,7 +53,7 @@ The Docker image is reproducible: building it from these two tags (`xbt-docker/b
 - Use a **new seed** created in Jam. Never import a wallet you used on the SHA-256 chain.
 - Keep Jam on `127.0.0.1`. Don't open port 28183 to the Internet or use `--network host`.
 - Fidelity bonds lock your coins until the date you pick; they are created from the Jam wallet and signed with `0x21`. Bonds from hardware or cold wallets aren't supported yet.
-- Problems: [Kilombino/joinmarket-ng issues](https://github.com/Kilombino/joinmarket-ng/issues).
+- Problems: [Kilombino/joinblaket issues](https://github.com/Kilombino/joinblaket/issues).
 
 ---
 
