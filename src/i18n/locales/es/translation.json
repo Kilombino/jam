@@ -405,7 +405,7 @@
     "rescan_chain": "Reescanear cadena",
     "fees": {
       "title": "Límites de comisión",
-      "description": "Ajusta las comisiones de minado y de los colaboradores a tu gusto. Estos ajustes vuelven a sus valores por defecto cuando se reinicia el servicio de JoinMarket, p. ej. al reiniciar el sistema. Para más información, <1>consulta la documentación sobre comisiones</1>.",
+      "description": "Ajusta las comisiones de minado y de los colaboradores a tu gusto. JoinBlaket guarda estos ajustes en este nodo, también tras un reinicio. Para más información, <1>consulta la documentación sobre comisiones</1>.",
       "title_general_fee_settings": "Comisiones de minado",
       "description_general_fee_settings": "La comisión de minado marca la prioridad de la transacción y depende del estado de la mempool.",
       "radio_tx_fees_blocks": "Objetivo en bloques",
