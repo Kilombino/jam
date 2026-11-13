@@ -401,7 +401,7 @@
     "documentation": "Documentación",
     "github": "GitHub",
     "matrix": "Matrix",
-    "telegram": "Telegram",
+    "telegram": "Telegram (grupo BIP110)",
     "rescan_chain": "Reescanear cadena",
     "fees": {
       "title": "Límites de comisión",
@@ -453,7 +453,8 @@
       "text_disabled": "Avisos por Telegram apagados.",
       "text_test_sent": "Mensaje de prueba enviado. Mira Telegram.",
       "error_chat_is_bot": "Ese es el número del bot (el principio del token). Pon tu propio id de Telegram: te lo dice @userinfobot."
-    }
+    },
+    "discord": "Discord"
   },
   "rescan_chain": {
     "title": "Reescanear cadena",

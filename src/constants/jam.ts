@@ -22,17 +22,18 @@ export const JAM_REPO_URL: string = (import.meta.env.VITE_JAM_REPO_URL || JAM_RE
 const JAM_DOCS_URL_DEFAULT: string = 'https://joinmarket-webui.github.io/jamdocs'
 export const JAM_DOCS_URL: string = (import.meta.env.VITE_JAM_DOCS_URL || JAM_DOCS_URL_DEFAULT) as string
 
-const JAM_MATRIX_URL_DEFAULT: string = 'https://matrix.to/#/%23jam:bitcoin.kyoto'
-export const JAM_MATRIX_URL: string = (import.meta.env.VITE_JAM_MATRIX_URL || JAM_MATRIX_URL_DEFAULT) as string
+// XBT build: the JoinBlaket community (BIP110 group in Spanish, and Discord).
+const JAM_DISCORD_URL_DEFAULT: string = 'https://discord.com/channels/1376602546545754244/1376616294291603497'
+export const JAM_DISCORD_URL: string = (import.meta.env.VITE_JAM_DISCORD_URL || JAM_DISCORD_URL_DEFAULT) as string
 
-const JAM_TELEGRAM_URL_DEFAULT: string = 'https://t.me/JoinMarketWebUI'
+const JAM_TELEGRAM_URL_DEFAULT: string = 'https://t.me/bip110_es'
 export const JAM_TELEGRAM_URL: string = (import.meta.env.VITE_JAM_TELEGRAM_URL || JAM_TELEGRAM_URL_DEFAULT) as string
 
 // XBT build: the backend is the XBT fork of JoinMarket-NG; bugs go there.
-const JAM_JMNG_REPO_URL_DEFAULT: string = 'https://github.com/Kilombino/joinmarket-ng'
+const JAM_JMNG_REPO_URL_DEFAULT: string = 'https://github.com/Kilombino/joinblaket'
 export const JAM_JMNG_REPO_URL: string = (import.meta.env.VITE_JAM_JMNG_REPO_URL || JAM_JMNG_REPO_URL_DEFAULT) as string
 
-const JAM_ISSUES_URL_DEFAULT: string = 'https://github.com/Kilombino/joinmarket-ng/issues'
+const JAM_ISSUES_URL_DEFAULT: string = 'https://github.com/Kilombino/joinblaket/issues'
 export const JAM_ISSUES_URL: string = (import.meta.env.VITE_JAM_ISSUES_URL || JAM_ISSUES_URL_DEFAULT) as string
 
 export const JAM_JM_RETRIES_DOCS_URL =

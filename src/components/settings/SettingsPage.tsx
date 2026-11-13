@@ -15,6 +15,7 @@ import {
   KeyRoundIcon,
   LanguagesIcon,
   LockKeyholeIcon,
+  MessagesSquareIcon,
   MoonIcon,
   PackageSearchIcon,
   PenLineIcon,
@@ -38,7 +39,7 @@ import { isDebugFeatureEnabled, isDevMode } from '@/constants/debugFeatures'
 import {
   JAM_DOCS_URL,
   JAM_JMNG_REPO_URL,
-  JAM_MATRIX_URL,
+  JAM_DISCORD_URL,
   JAM_SEED_MODAL_TIMEOUT,
   JAM_TELEGRAM_URL,
 } from '@/constants/jam'
@@ -46,7 +47,7 @@ import { routes } from '@/constants/routes'
 import { useJamDisplayContext } from '@/context/JamDisplayContext'
 import { useFeatures } from '@/hooks/useFeatures'
 import { useFeeConfigValidation } from '@/hooks/useFeeConfigValidation'
-import { cn, type WalletFileName } from '@/lib/utils'
+import { type WalletFileName } from '@/lib/utils'
 import { authStore } from '@/store/authStore'
 import { jamSettingsStore } from '@/store/jamSettingsStore'
 import { Badge } from '../ui/badge'
@@ -276,19 +277,12 @@ export const SettingsBasicContent = ({ walletFileName, onLockWallet }: SettingBa
         </CardHeader>
         <CardContent>
           <SettingsLink
-            renderIcon={({ className }) => (
-              <img src="/matrix-logo.png" alt="Matrix" className={cn(className, 'light:invert-0 invert')} />
-            )}
-            title={t('settings.matrix')}
-            to={JAM_MATRIX_URL}
-            external={true}
-          />
-          <SettingsLink
             renderIcon={({ className }) => <img src="/telegram-logo.png" alt="Telegram" className={className} />}
             title={t('settings.telegram')}
             to={JAM_TELEGRAM_URL}
             external={true}
           />
+          <SettingsLink icon={MessagesSquareIcon} title={t('settings.discord')} to={JAM_DISCORD_URL} external={true} />
         </CardContent>
       </Card>
 
