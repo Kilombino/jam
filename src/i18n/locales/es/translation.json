@@ -436,6 +436,22 @@
       "error_loading_fee_config_failed": "Error al cargar la configuración de comisiones. Motivo: {{ reason }}",
       "error_reloading_fee_config_failed": "Error al recargar la configuración de comisiones. Motivo: {{ reason }}",
       "success_message": "Comisiones actualizadas."
+    },
+    "show_telegram": "Avisos por Telegram",
+    "telegram_modal": {
+      "title": "Avisos por Telegram",
+      "subtitle": "Tu maker avisa a un bot de Telegram cuando alguien toma tu oferta, cuando termina un coinjoin y si pierde los directorios.",
+      "text_off": "Los avisos están apagados.",
+      "text_enabled": "Los avisos van al chat {{chat}}.",
+      "text_howto": "Crea un bot con @BotFather y copia su token. Escribe /start a tu bot y consigue tu id de chat (por ejemplo con @userinfobot). El token se guarda en este nodo y no se vuelve a mostrar.",
+      "label_token": "Token del bot",
+      "label_chat": "Id del chat",
+      "button_save": "Guardar",
+      "button_test": "Enviar prueba",
+      "button_disable": "Apagar",
+      "text_saved": "Avisos por Telegram activados.",
+      "text_disabled": "Avisos por Telegram apagados.",
+      "text_test_sent": "Mensaje de prueba enviado. Mira Telegram."
     }
   },
   "rescan_chain": {

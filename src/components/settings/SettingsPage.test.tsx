@@ -136,6 +136,15 @@ vi.mock('./KilowalletWatchDialog', () => ({
     ) : null,
 }))
 
+vi.mock('./TelegramNoticesDialog', () => ({
+  TelegramNoticesDialog: ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) =>
+    open ? (
+      <button type="button" onClick={() => onOpenChange(false)}>
+        telegram-dialog
+      </button>
+    ) : null,
+}))
+
 vi.mock('./SignMessageDialog', () => ({
   SignMessageDialog: ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) =>
     open ? (

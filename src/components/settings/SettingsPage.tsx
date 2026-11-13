@@ -2,26 +2,27 @@ import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import type { TFunction } from 'i18next'
 import {
+  BellRingIcon,
+  BookIcon,
+  BookKeyIcon,
   EyeIcon,
   EyeOffIcon,
-  SunIcon,
-  MoonIcon,
   FileTextIcon,
-  BookIcon,
-  TerminalIcon,
-  PackageSearchIcon,
-  LockKeyholeIcon,
-  BookKeyIcon,
-  FoldHorizontalIcon,
-  UnfoldHorizontalIcon,
-  KeyRoundIcon,
-  HandCoinsIcon,
-  SparklesIcon,
-  HistoryIcon,
-  LanguagesIcon,
   FlaskConicalIcon,
+  FoldHorizontalIcon,
+  HandCoinsIcon,
+  HistoryIcon,
+  KeyRoundIcon,
+  LanguagesIcon,
+  LockKeyholeIcon,
+  MoonIcon,
+  PackageSearchIcon,
   PenLineIcon,
   ScanEyeIcon,
+  SparklesIcon,
+  SunIcon,
+  TerminalIcon,
+  UnfoldHorizontalIcon,
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useTranslation } from 'react-i18next'
@@ -56,6 +57,7 @@ import { KilowalletWatchDialog } from './KilowalletWatchDialog'
 import { SeedPhraseDialog } from './SeedPhraseDialog'
 import { SettingsItem, SettingsLink, SettingsSwitch } from './SettingsItem'
 import { SignMessageDialog } from './SignMessageDialog'
+import { TelegramNoticesDialog } from './TelegramNoticesDialog'
 import { FeeConfigDialog } from './fees/FeeConfigDialog'
 
 const GitHubIcon = ({ className }: { className: string }) => (
@@ -107,6 +109,7 @@ export const SettingsBasicContent = ({ walletFileName, onLockWallet }: SettingBa
   const [showSeedDialog, setShowSeedDialog] = useState(false)
   const [showXpubsDialog, setShowXpubsDialog] = useState(false)
   const [showKilowalletDialog, setShowKilowalletDialog] = useState(false)
+  const [showTelegramDialog, setShowTelegramDialog] = useState(false)
   const [showFeeConfigDialog, setShowFeeConfigDialog] = useState(false)
   const hashedPassword = useStore(authStore, (state) => state.state?.hashed_password)
   const { isFeatureEnabled } = useFeatures()
@@ -127,6 +130,7 @@ export const SettingsBasicContent = ({ walletFileName, onLockWallet }: SettingBa
         onOpenChange={setShowFeeConfigDialog}
       />
 
+      <TelegramNoticesDialog open={showTelegramDialog} onOpenChange={setShowTelegramDialog} />
       <KilowalletWatchDialog
         walletFileName={walletFileName}
         open={showKilowalletDialog}
@@ -197,6 +201,12 @@ export const SettingsBasicContent = ({ walletFileName, onLockWallet }: SettingBa
             icon={HandCoinsIcon}
             title={t('settings.show_fee_config')}
             action={() => setShowFeeConfigDialog(true)}
+          />
+          <Separator className="opacity-50" />
+          <SettingsItem
+            icon={BellRingIcon}
+            title={t('settings.show_telegram')}
+            action={() => setShowTelegramDialog(true)}
           />
         </CardContent>
       </Card>
