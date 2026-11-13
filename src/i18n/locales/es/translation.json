@@ -443,15 +443,16 @@
       "subtitle": "Tu maker avisa a un bot de Telegram cuando alguien toma tu oferta, cuando termina un coinjoin y si pierde los directorios.",
       "text_off": "Los avisos están apagados.",
       "text_enabled": "Los avisos van al chat {{chat}}.",
-      "text_howto": "Crea un bot con @BotFather y copia su token. Escribe /start a tu bot y consigue tu id de chat (por ejemplo con @userinfobot). El token se guarda en este nodo y no se vuelve a mostrar.",
+      "text_howto": "Crea un bot con @BotFather y copia su token. Escribe /start a tu bot (no contestará: es normal). Tu id de Telegram es un número: te lo dice @userinfobot. No es el número del bot, el que va antes de los dos puntos en el token. El token se guarda en este nodo y no se vuelve a mostrar.",
       "label_token": "Token del bot",
-      "label_chat": "Id del chat",
+      "label_chat": "Tu id de Telegram",
       "button_save": "Guardar",
       "button_test": "Enviar prueba",
       "button_disable": "Apagar",
       "text_saved": "Avisos por Telegram activados.",
       "text_disabled": "Avisos por Telegram apagados.",
-      "text_test_sent": "Mensaje de prueba enviado. Mira Telegram."
+      "text_test_sent": "Mensaje de prueba enviado. Mira Telegram.",
+      "error_chat_is_bot": "Ese es el número del bot (el principio del token). Pon tu propio id de Telegram: te lo dice @userinfobot."
     }
   },
   "rescan_chain": {

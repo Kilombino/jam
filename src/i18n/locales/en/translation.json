@@ -443,15 +443,16 @@
       "subtitle": "Your maker tells a Telegram bot when someone takes your offer, when a CoinJoin is done and when it loses the directories.",
       "text_off": "Notices are off.",
       "text_enabled": "Notices go to chat {{chat}}.",
-      "text_howto": "Create a bot with @BotFather and copy its token. Send /start to your bot, then get your chat id (for example from @userinfobot). The token is stored on this node and never shown again.",
+      "text_howto": "Create a bot with @BotFather and copy its token. Send /start to your bot (it will not answer: that is normal). Your Telegram id is a number: @userinfobot tells you yours. It is not the bot's number, the one before the colon in the token. The token is stored on this node and never shown again.",
       "label_token": "Bot token",
-      "label_chat": "Chat id",
+      "label_chat": "Your Telegram id",
       "button_save": "Save",
       "button_test": "Send a test",
       "button_disable": "Turn off",
       "text_saved": "Telegram notices are on.",
       "text_disabled": "Telegram notices are off.",
-      "text_test_sent": "Test message sent. Check Telegram."
+      "text_test_sent": "Test message sent. Check Telegram.",
+      "error_chat_is_bot": "That is the bot's number (the start of the token). Put your own Telegram id: @userinfobot tells you."
     }
   },
   "rescan_chain": {

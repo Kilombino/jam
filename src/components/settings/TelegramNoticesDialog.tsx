@@ -105,6 +105,8 @@ export const TelegramNoticesDialog = ({ open, onOpenChange, ...dialogProps }: Te
   })
 
   const status = statusQuery.data
+  // The bot's own number (before the colon in the token) is a common mistake for the chat id.
+  const chatIsBot = chatId.trim() !== '' && chatId.trim() === botToken.trim().split(':', 1)[0]
   const busy = saveMutation.isPending || disableMutation.isPending || testMutation.isPending
 
   return (
@@ -163,7 +165,13 @@ export const TelegramNoticesDialog = ({ open, onOpenChange, ...dialogProps }: Te
               placeholder={status?.chat_id ?? '123456789'}
               value={chatId}
               onChange={(event_) => setChatId(event_.target.value)}
+              aria-invalid={chatIsBot}
             />
+            {chatIsBot && (
+              <p className="text-destructive text-sm" data-testid="telegram-chat-is-bot">
+                {t('settings.telegram_modal.error_chat_is_bot')}
+              </p>
+            )}
           </div>
         </div>
 
@@ -181,7 +189,7 @@ export const TelegramNoticesDialog = ({ open, onOpenChange, ...dialogProps }: Te
             )}
           </div>
           <Button
-            disabled={busy || botToken.trim() === '' || chatId.trim() === ''}
+            disabled={busy || botToken.trim() === '' || chatId.trim() === '' || chatIsBot}
             onClick={() => saveMutation.mutate()}
           >
             {saveMutation.isPending && <Spinner className="motion-reduce:hidden" />}
