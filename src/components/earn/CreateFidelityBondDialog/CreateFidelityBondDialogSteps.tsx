@@ -2,7 +2,9 @@ import { AlertTriangleIcon, CheckIcon, CalendarIcon, WalletIcon, CoinsIcon, Lock
 import { Trans, useTranslation } from 'react-i18next'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Card, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 import { Address } from '@/components/ui/jam/Address'
+import { Label } from '@/components/ui/label'
 import {
   Pagination,
   PaginationContent,
@@ -54,6 +56,8 @@ export function CreateFidelityBondDialogSteps({ wizard }: CreateFidelityBondDial
     utxosToFreeze,
     confirmationChecked,
     setConfirmationChecked,
+    feeRateInput,
+    setFeeRateInput,
     address,
     timelockAddressQuery,
     txResult,
@@ -300,6 +304,19 @@ export function CreateFidelityBondDialogSteps({ wizard }: CreateFidelityBondDial
             <InfoCard highlight label={t('earn.fidelity_bond.review_inputs.label_amount')}>
               <FidelityBondAmount value={totalAmount} />
             </InfoCard>
+          </div>
+
+          <div className="space-y-1">
+            <Label htmlFor="fb-fee-rate">{t('earn.fidelity_bond.review_inputs.label_fee_rate')}</Label>
+            <Input
+              id="fb-fee-rate"
+              inputMode="decimal"
+              autoComplete="off"
+              placeholder={t('earn.fidelity_bond.review_inputs.placeholder_fee_rate')}
+              value={feeRateInput}
+              onChange={(event_) => setFeeRateInput(event_.target.value)}
+            />
+            <p className="text-muted-foreground text-xs">{t('earn.fidelity_bond.review_inputs.hint_fee_rate')}</p>
           </div>
 
           {timelockAddressQuery.isLoading ? (

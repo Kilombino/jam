@@ -26,6 +26,16 @@ import {
 import type { Step } from './types'
 import { generateLockdateOptions } from './types'
 
+/**
+ * The direct-send `txfee` for a fee rate typed in sat/vB, or undefined for the configured policy.
+ * jmwalletd reads 1-1000 as a block target and more as sat/kvB, so 1 sat/vB goes as 1001.
+ */
+export const bondTxFee = (input: string): number | undefined => {
+  const rate = Number.parseFloat(input.replace(',', '.'))
+  if (!Number.isFinite(rate) || rate < 1) return undefined
+  return Math.max(1_001, Math.ceil(rate * 1_000))
+}
+
 export function useCreateFidelityBondWizard(
   open: boolean,
   onOpenChange: (open: boolean) => void,
@@ -40,6 +50,9 @@ export function useCreateFidelityBondWizard(
   const [frozenUtxos, setFrozenUtxos] = useState<Utxo[]>([])
   const [utxoPage, setUtxoPage] = useState(0)
   const [txResult, setTxResult] = useState<DirectSendResponse | undefined>()
+  // JoinBlaket: an optional mining fee for the bond's transaction, in sat/vB ('' = the configured
+  // fee policy, i.e. your node's estimate).
+  const [feeRateInput, setFeeRateInput] = useState('')
 
   const { freezeUtxo, unfreezeUtxo, directSend, error, setError } = useFidelityBondMutations({
     unfreezeErrorKey: 'earn.fidelity_bond.error_unfreezing_utxos',
@@ -295,6 +308,7 @@ export function useCreateFidelityBondWizard(
           // Pin the reviewed utxos so the sweep spends exactly those, instead of
           // whatever is unfrozen in the mixdepth once the user confirms.
           input_utxos: selectedUtxos.map((utxo) => utxo.utxo),
+          txfee: bondTxFee(feeRateInput),
         },
       })
       broadcasted = true
@@ -423,6 +437,8 @@ export function useCreateFidelityBondWizard(
     utxosToFreeze,
     confirmationChecked,
     setConfirmationChecked,
+    feeRateInput,
+    setFeeRateInput,
     address,
     timelockAddressQuery,
     txResult,

@@ -762,7 +762,10 @@
         "label_jar": "Financiado desde",
         "label_jar_n": "Bote {{ jar }}",
         "label_amount": "Importe a bloquear",
-        "label_address": "Los fondos se bloquearán temporalmente y se enviarán a"
+        "label_address": "Los fondos se bloquearán temporalmente y se enviarán a",
+        "label_fee_rate": "Comisión de minado (sat/vB, opcional)",
+        "placeholder_fee_rate": "La estimación de tu nodo",
+        "hint_fee_rate": "Déjalo vacío para usar la estimación de tu nodo (Ajustes › Ajustar límites de comisión). Mínimo 1 sat/vB."
       },
       "create_fidelity_bond": {
         "title": "Crear bono de fidelidad",

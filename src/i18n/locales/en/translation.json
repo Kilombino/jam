@@ -746,7 +746,10 @@
         "label_jar": "Funded from",
         "label_jar_n": "Jar {{ jar }}",
         "label_amount": "Amount to be locked",
-        "label_address": "Funds will be time-locked and sent to"
+        "label_address": "Funds will be time-locked and sent to",
+        "label_fee_rate": "Mining fee (sat/vB, optional)",
+        "placeholder_fee_rate": "Your node's estimate",
+        "hint_fee_rate": "Leave it empty to use your node's estimate (Settings › Adjust fee limits). At least 1 sat/vB."
       },
       "create_fidelity_bond": {
         "title": "Create Fidelity Bond",

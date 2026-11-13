@@ -646,3 +646,16 @@ describe('useCreateFidelityBondWizard', () => {
     })
   })
 })
+
+describe('bondTxFee (JoinBlaket)', () => {
+  it('turns sat/vB into a direct-send txfee above the block-target range', async () => {
+    const { bondTxFee } = await import('./useCreateFidelityBondWizard')
+    expect(bondTxFee('')).toBeUndefined()
+    expect(bondTxFee('abc')).toBeUndefined()
+    expect(bondTxFee('0.5')).toBeUndefined()
+    expect(bondTxFee('1')).toBe(1001)
+    expect(bondTxFee('1,5')).toBe(1500)
+    expect(bondTxFee('3')).toBe(3000)
+    expect(bondTxFee('2.0004')).toBe(2001)
+  })
+})
