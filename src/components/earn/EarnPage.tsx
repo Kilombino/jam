@@ -396,7 +396,7 @@ export const EarnPage = ({ walletFileName }: EarnPageProps) => {
                     <Trans
                       i18nKey="earn.fidelity_bond.create_form.alert_no_eligible_utxos_description"
                       components={{
-                        '1': <Link to={routes.send} className="font-semibold" />,
+                        '1': <Link to={routes.receive} className="font-semibold" />,
                         '3': <Link to={routes.walletJarsDetails} className="font-semibold" />,
                       }}
                     />

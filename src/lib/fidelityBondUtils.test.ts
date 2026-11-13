@@ -216,8 +216,11 @@ describe('utils', () => {
     it('should identify UTXOs eligible for fidelity-bond creation', () => {
       expect(fb.utxo.isEligibleForCreation(makeUtxo('foo:0'), 'cj-out')).toBe(true)
       expect(fb.utxo.isEligibleForCreation(makeUtxo('foo:0', '', true), 'cj-out')).toBe(false)
-      expect(fb.utxo.isEligibleForCreation(makeUtxo('foo:0'), 'deposit')).toBe(false)
-      expect(fb.utxo.isEligibleForCreation(makeUtxo('foo:0'))).toBe(false)
+      // JoinBlaket: any unfrozen coin, not only CoinJoin outputs
+      expect(fb.utxo.isEligibleForCreation(makeUtxo('foo:0'), 'deposit')).toBe(true)
+      expect(fb.utxo.isEligibleForCreation(makeUtxo('foo:0'))).toBe(true)
+      expect(fb.utxo.isCoinjoinOutput('cj-out')).toBe(true)
+      expect(fb.utxo.isCoinjoinOutput('deposit')).toBe(false)
 
       const fidelityBond = {
         ...makeUtxo('foo:0'),

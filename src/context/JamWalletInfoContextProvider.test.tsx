@@ -147,7 +147,8 @@ describe('<JamWalletInfoContextProvider />', () => {
     expect(context?.jars.map((jar) => jar.jarIndex)).toEqual([0, 1, 2, 3, 4, 7])
     expect(context?.jars.find((jar) => jar.jarIndex === 7)?.name).toBe('Jar #7')
     expect(context?.fidelityBondSummary.fbOutputs.map((entry) => entry.utxo)).toEqual([`${txid('c')}:2`])
-    expect(context?.hasEligibleFidelityBondUtxo).toBe(false)
+    // JoinBlaket: any unfrozen coin can fund a bond, not only CoinJoin outputs.
+    expect(context?.hasEligibleFidelityBondUtxo).toBe(true)
     expect(context?.accountSummary[0].branches[0]).toMatchObject({
       type: 'external addresses',
       derivation: "m/84'/1'/0'/0",

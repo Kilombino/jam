@@ -132,6 +132,11 @@ export function useCreateFidelityBondWizard(
     })
   }, [availableUtxos, selectedUtxoIds])
 
+  const hasNonCoinjoinUtxo = useMemo(
+    () => selectedUtxos.some((utxo) => !fb.utxo.isCoinjoinOutput(walletInfo.addressSummary[utxo.address]?.status)),
+    [selectedUtxos, walletInfo.addressSummary],
+  )
+
   const utxosToFreeze = useMemo(() => {
     if (selectedJar === undefined) return []
     return selectedJar.utxos.filter(
@@ -408,6 +413,7 @@ export function useCreateFidelityBondWizard(
     setSelectedJarIndex,
     jarsWithUtxos,
     selectedUtxos,
+    hasNonCoinjoinUtxo,
     availableUtxos,
     utxoPage,
     setUtxoPage,

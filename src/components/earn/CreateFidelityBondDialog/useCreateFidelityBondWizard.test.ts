@@ -396,7 +396,7 @@ describe('useCreateFidelityBondWizard', () => {
     await waitFor(() => expect(result.current.selectedUtxos).toEqual([]))
   })
 
-  it('only exposes unfrozen cj-out utxos for fidelity-bond creation', () => {
+  it('exposes every unfrozen coin and flags the ones not from a CoinJoin (JoinBlaket)', () => {
     mocks.walletInfo.addressSummary = {
       bcrt1qcj: { status: 'cj-out' },
       bcrt1qdeposit: { status: 'deposit' },
@@ -408,9 +408,16 @@ describe('useCreateFidelityBondWizard', () => {
 
     const { result } = renderHook(() => useCreateFidelityBondWizard(true, vi.fn(), 'wallet.jmdat'))
 
-    expect(result.current.jarsWithUtxos.map((entry) => entry.jarIndex)).toEqual([0])
+    expect(result.current.jarsWithUtxos.map((entry) => entry.jarIndex)).toEqual([0, 1])
     act(() => result.current.setSelectedJarIndex(0))
-    expect(result.current.availableUtxos.map((entry) => entry.utxo)).toEqual(['cj:0'])
+    expect(result.current.availableUtxos.map((entry) => entry.utxo).toSorted()).toEqual(['cj:0', 'deposit:0'])
+
+    const cj = result.current.availableUtxos.find((entry) => entry.utxo === 'cj:0')!
+    const deposit = result.current.availableUtxos.find((entry) => entry.utxo === 'deposit:0')!
+    act(() => result.current.toggleUtxoSelection(cj))
+    expect(result.current.hasNonCoinjoinUtxo).toBe(false)
+    act(() => result.current.toggleUtxoSelection(deposit))
+    expect(result.current.hasNonCoinjoinUtxo).toBe(true)
   })
 
   it('reflects canProceed gating for each step', () => {

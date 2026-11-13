@@ -44,6 +44,7 @@ export function CreateFidelityBondDialogSteps({ wizard }: CreateFidelityBondDial
     setSelectedJarIndex,
     jarsWithUtxos,
     selectedUtxos,
+    hasNonCoinjoinUtxo,
     availableUtxos,
     utxoPage,
     setUtxoPage,
@@ -209,6 +210,14 @@ export function CreateFidelityBondDialogSteps({ wizard }: CreateFidelityBondDial
                 <FidelityBondAmount value={totalAmount} className="shrink-0 text-lg" />
               </div>
             </div>
+          )}
+
+          {hasNonCoinjoinUtxo && (
+            <Alert variant="warning" data-testid="fb-non-coinjoin-warning">
+              <AlertTriangleIcon className="h-4 w-4" />
+              <AlertTitle>{t('earn.fidelity_bond.select_utxos.alert_non_coinjoin_title')}</AlertTitle>
+              <AlertDescription>{t('earn.fidelity_bond.select_utxos.alert_non_coinjoin_description')}</AlertDescription>
+            </Alert>
           )}
 
           {isUsingAllFunds && (

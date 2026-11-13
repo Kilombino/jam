@@ -112,8 +112,12 @@ export const utxo = (() => {
   const isFidelityBond = (utxo: Utxo): utxo is FidelityBondUtxo => !!utxo.locktime
 
   // TODO: allow selecting frozen UTXOs and unfreeze them before sending the transaction
-  const isEligibleForCreation = (utxo: Utxo, addressStatus?: string) =>
-    !utxo.frozen && !isFidelityBond(utxo) && addressStatus === 'cj-out'
+  // JoinBlaket: upstream Jam only funds a bond from a CoinJoin output (cj-out). On the young
+  // BLAKE2b market there are no CoinJoins without makers and no makers without a bond, so any
+  // unfrozen coin is allowed; the wizard warns when a chosen coin is not a CoinJoin output.
+  const isEligibleForCreation = (utxo: Utxo, _addressStatus?: string) => !utxo.frozen && !isFidelityBond(utxo)
+
+  const isCoinjoinOutput = (addressStatus?: string) => addressStatus === 'cj-out'
 
   const getLocktime = (utxo: Utxo): Milliseconds | null => {
     if (!isFidelityBond(utxo)) return null
@@ -134,6 +138,7 @@ export const utxo = (() => {
 
   return {
     isEqual,
+    isCoinjoinOutput,
     isInList,
     utxosToFreeze,
     allAreFrozen,

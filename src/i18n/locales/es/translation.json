@@ -739,7 +739,9 @@
           "confirmations_one": "{{ count }} confirmación",
           "confirmations_other": "{{ count }} confirmaciones",
           "confirmations_many": "{{ count }} confirmaciones"
-        }
+        },
+        "alert_non_coinjoin_title": "No viene de un coinjoin",
+        "alert_non_coinjoin_description": "Al menos una de estas monedas no viene de un coinjoin. Tu fianza es pública: cualquiera puede seguir estas monedas hasta su origen. Jam original solo deja usar salidas de coinjoin; JoinBlaket deja usar cualquier moneda mientras arranca el mercado BLAKE2b, porque aún no hay coinjoins. Si te importa, usa monedas que no te identifiquen."
       },
       "freeze_utxos": {
         "text_primary_button": "Congelar UTXOs",
@@ -786,7 +788,7 @@
         "confirmation_toggle_title": "He revisado bien los datos",
         "confirmation_toggle_subtitle": "Entiendo que los fondos bloqueados serán inaccesibles durante el periodo indicado",
         "alert_no_eligible_utxos_title": "No hay UTXOs aptos",
-        "alert_no_eligible_utxos_description": "Un bono de fidelidad debe financiarse con una salida de transacción colaborativa (cj-out) sin congelar. <1>Completa una transacción colaborativa</1> o <3>descongela un UTXO apto</3> para continuar.",
+        "alert_no_eligible_utxos_description": "Un bono de fidelidad necesita una moneda de tu cartera que no esté congelada. <1>Recibe fondos</1> o <3>descongela una moneda</3> para continuar.",
         "button_create": "Crear bono de fidelidad"
       },
       "existing": {
