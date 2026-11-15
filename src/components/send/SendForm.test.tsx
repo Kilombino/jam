@@ -21,8 +21,17 @@ const h = vi.hoisted(() => {
     hasOrders: true,
     orderbookIsLoading: false,
     orderbookError: false,
+    maxCoinjoin: undefined as Record<string, unknown> | undefined,
+    maxCoinjoinCalls: [] as { parameters: Record<string, unknown>; enabled: boolean }[],
   }
 })
+
+vi.mock('@/hooks/useTakerOutcome', () => ({
+  useMaxCoinjoin: (_wallet: string, parameters: Record<string, unknown>, enabled: boolean) => {
+    h.maxCoinjoinCalls.push({ parameters, enabled })
+    return { data: enabled ? h.maxCoinjoin : undefined }
+  },
+}))
 
 vi.mock('@/hooks/useQueryOrderbook', () => ({
   useQueryOrderbook: () => ({
@@ -134,6 +143,14 @@ const readDebugAmountValues = (): { isSweep?: boolean; sweepUtxos?: string[] } =
   return parsed.amount ?? {}
 }
 
+const submitButton = () => document.querySelector<HTMLButtonElement>('button[type="submit"]')!
+
+const selectJar0AndType = async (amount: string) => {
+  fireEvent.click(screen.getByText('Jar 0'))
+  fireEvent.change(screen.getByPlaceholderText('send.placeholder_amount_input'), { target: { value: amount } })
+  await flushActUpdates()
+}
+
 describe('SendForm', () => {
   const mockJars = [
     {
@@ -190,6 +207,8 @@ describe('SendForm', () => {
     h.hasOrders = true
     h.orderbookIsLoading = false
     h.orderbookError = false
+    h.maxCoinjoin = undefined
+    h.maxCoinjoinCalls = []
   })
 
   it('renders the core fields', () => {
@@ -512,5 +531,69 @@ describe('SendForm', () => {
     expect(screen.queryByText('orderbook.alert_precheck_empty_title')).not.toBeInTheDocument()
 
     await flushActUpdates()
+  })
+
+  describe('JoinBlaket: max in one CoinJoin', () => {
+    // The 15 Nov 2026 case: jar 0 holds two deposits, the largest 297,776 sats.
+    const md0Max = {
+      mixdepth: 0,
+      counterparties: 1,
+      min_confirmations: 5,
+      max_selectable: 297_776,
+      max_sendable: 296_000,
+      limited_by: 'md0_no_merge',
+      merge_restricted: true,
+      eligible_count: 2,
+      eligible_value: 417_776,
+      largest_utxo: 297_776,
+      mergeable_pool: 0,
+      immature_value: 0,
+      fee_rate_sat_vb: 2,
+      estimated_tx_fee: 500,
+      max_maker_fee_abs: 500,
+      max_maker_fee_rel: 0.001,
+    }
+
+    it('asks the daemon for the selected jar and shows the max with the reason', async () => {
+      h.maxCoinjoin = md0Max
+      renderForm()
+      await selectJar0AndType('100000')
+      const lastCall = h.maxCoinjoinCalls.at(-1)
+      expect(lastCall?.enabled).toBe(true)
+      expect(lastCall?.parameters.mixdepth).toBe(0)
+      expect(screen.getByTestId('max-coinjoin-hint')).toBeInTheDocument()
+      expect(screen.getByText(/send\.max_coinjoin\.label/)).toBeInTheDocument()
+      expect(screen.getByText(/send\.max_coinjoin\.md0_no_merge/)).toBeInTheDocument()
+      expect(screen.queryByTestId('max-coinjoin-too-much')).not.toBeInTheDocument()
+      expect(submitButton()).toBeEnabled()
+    })
+
+    it('blocks an amount above what one CoinJoin can fund, with a one-line explanation', async () => {
+      h.maxCoinjoin = md0Max
+      renderForm()
+      await selectJar0AndType('354414')
+      expect(screen.getByTestId('max-coinjoin-too-much')).toHaveTextContent('send.max_coinjoin.too_much_md0')
+      expect(submitButton()).toBeDisabled()
+    })
+
+    it('only warns between the safe max and the hard max', async () => {
+      h.maxCoinjoin = md0Max
+      renderForm()
+      await selectJar0AndType('297000')
+      expect(screen.getByText(/send\.max_coinjoin\.near_limit/)).toBeInTheDocument()
+      expect(submitButton()).toBeEnabled()
+    })
+
+    it('does not ask for a send without CoinJoin', async () => {
+      h.maxCoinjoin = md0Max
+      renderForm()
+      fireEvent.click(screen.getByText('Jar 0'))
+      fireEvent.click(screen.getByText('send.sending_options'))
+      await flushActUpdates()
+      fireEvent.click(screen.getByLabelText('send.toggle_coinjoin'))
+      await flushActUpdates()
+      expect(h.maxCoinjoinCalls.at(-1)?.enabled).toBe(false)
+      expect(screen.queryByTestId('max-coinjoin-hint')).not.toBeInTheDocument()
+    })
   })
 })

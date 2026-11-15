@@ -267,6 +267,36 @@
       "nested_hint_wait_for_block_other": "Seleziona un altro vaso da cui inviare o attendi altri {{ count }} ulteriori blocchi.",
       "nested_hint_fund_jar": "Seleziona un altro vaso da cui inviare, oppure deposita in questo vaso e attendi un blocco.",
       "nested_hint_fund_jar_other": "Seleziona un altro vaso da cui inviare, oppure deposita in questo vaso e attendi {{ count }} blocchi."
+    },
+    "taker_failure": {
+      "title": "Il CoinJoin non è avvenuto",
+      "title_complete": "CoinJoin inviato",
+      "no_funds_moved": "Non è stato inviato nulla e nessun fondo si è mosso.",
+      "md0_no_merge": "Hai chiesto {{needed}} sats, ma questo barattolo non unisce monete che non provengono da un CoinJoin (per la tua privacy), e la tua moneta singola più grande ha {{largest}} sats.",
+      "md0_no_merge_fees": "{{amount}} sats più circa {{fees}} sats di commissioni non stanno in una sola moneta.",
+      "hint_send_less_or_consolidate": "Invia meno (un CoinJoin può spendere al massimo {{max}} sats da questo barattolo, commissioni incluse) oppure consolida prima: invia le monete a te stesso senza CoinJoin, attendi le conferme e riprova.",
+      "hint_confirmations": "Alcune monete sono ancora giovani: il CoinJoin usa solo monete con almeno {{confirmations}} conferme. Attendere altri blocchi aiuterà.",
+      "insufficient_funds": "Monete insufficienti per questo CoinJoin: servono {{needed}} sats e il barattolo può usarne {{available}}.",
+      "unconfirmed_funds": "Monete confermate insufficienti: servono {{needed}} sats, {{available}} sats sono utilizzabili e {{unconfirmed}} sats sono ancora troppo giovani.",
+      "no_eligible_utxos": "Nessuna moneta del barattolo #{{jar}} può essere usata ora per un CoinJoin.",
+      "hint_no_eligible_utxos": "Le monete devono avere almeno {{confirmations}} conferme e non essere congelate; i fidelity bond non vengono mai usati.",
+      "podle_utxo_too_small": "Nessuna delle tue monete è abbastanza grande per aprire questo CoinJoin: una moneta deve avere almeno {{needed}} sats (il {{percent}}% dell'importo).",
+      "hint_podle": "Invia meno o usa un barattolo con una moneta più grande.",
+      "not_enough_offers": "Maker insufficienti sul mercato: trovati {{found}}, ne servono almeno {{minimum}}.",
+      "not_enough_makers": "Maker adatti insufficienti: trovati {{found}}, ne servono almeno {{minimum}}.",
+      "not_enough_makers_bond": "Maker con fidelity bond insufficienti: trovati {{found}}, ne servono almeno {{minimum}}.",
+      "hint_try_later": "Riprova più tardi o chiedi meno collaboratori.",
+      "hint_fee_limits": "I maker che chiedono più dei tuoi limiti di commissione vengono saltati: controlla i limiti nelle impostazioni o riprova più tardi.",
+      "other": "Motivo indicato da JoinBlaket: {{reason}}"
+    },
+    "max_coinjoin": {
+      "label": "Massimo in un CoinJoin da {{jar}}:",
+      "md0_no_merge": "Questo barattolo non unisce monete che non provengono da un CoinJoin (privacy): un CoinJoin può spendere al massimo la tua moneta più grande ({{largest}} su {{total}} sats), meno le commissioni.",
+      "podle": "Una moneta deve avere almeno un quinto dell'importo per aprire il CoinJoin.",
+      "immature": "{{amount}} sats non contano ancora: servono {{confirmations}} conferme.",
+      "too_much": "Troppo per un CoinJoin da questo barattolo: invia al massimo {{max}} sats.",
+      "too_much_md0": "Troppo per un CoinJoin da questo barattolo (le monete non mescolate non vengono unite): invia al massimo {{max}} sats o consolida prima inviando le monete a te stesso senza CoinJoin.",
+      "near_limit": "Vicino al limite: con la commissione di mining (circa {{fee}} sats) e quelle dei maker potrebbe non bastare. Fino a {{max}} sats è sicuro."
     }
   },
   "receive": {

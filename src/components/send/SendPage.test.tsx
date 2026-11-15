@@ -38,6 +38,15 @@ const mocks = vi.hoisted(() => ({
   hasOrders: true,
   orderbookIsLoading: false,
   orderbookError: null as Error | null,
+  takerStatus: undefined as Record<string, unknown> | undefined,
+  takerStatusCalls: [] as { attemptKey?: number; enabled: boolean }[],
+}))
+
+vi.mock('@/hooks/useTakerOutcome', () => ({
+  useTakerStatus: (_wallet: string, attemptKey: number | undefined, enabled: boolean) => {
+    mocks.takerStatusCalls.push({ attemptKey, enabled })
+    return { data: enabled ? mocks.takerStatus : undefined }
+  },
 }))
 
 vi.mock('@joinmarket-webui/joinmarket-api-ts/@tanstack/react-query', () => ({
@@ -333,6 +342,8 @@ describe('SendPage', () => {
   beforeEach(() => {
     mocks.clearCurrentPaymentAttempt.mockReset()
     mocks.currentPaymentAttemptPresent = false
+    mocks.takerStatus = undefined
+    mocks.takerStatusCalls = []
     mocks.directSend.mockReset()
     mocks.fetchIfMissing.mockReset()
     mocks.fetchIfMissing.mockResolvedValue({ value: '4' })
@@ -586,6 +597,50 @@ describe('SendPage', () => {
     expect(screen.queryByText('send.alert_collaborative_ended_title')).not.toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'global.done' }))
     expect(mocks.clearCurrentPaymentAttempt).toHaveBeenCalled()
+  })
+
+  it('JoinBlaket: shows why the CoinJoin failed (taker/status error code), not just "stopped"', async () => {
+    const user = userEvent.setup()
+    mocks.currentPaymentAttemptPresent = true
+    mocks.takerStatus = {
+      running: false,
+      status: 'failed',
+      error: 'Insufficient funds: ... Cannot merge non-CJ md0 UTXOs for privacy reasons.',
+      error_code: 'md0_no_merge',
+      error_params: { mixdepth: 0, needed: 354_414, largest_utxo: 297_776, max_amount: 297_776 },
+    }
+
+    render(<SendPage walletFileName="wallet.jmdat" />)
+
+    expect(mocks.takerStatusCalls.at(-1)).toEqual({ attemptKey: 1, enabled: true })
+    expect(screen.getByTestId('collaborative-send-failed')).toBeInTheDocument()
+    expect(screen.getByText('send.taker_failure.title')).toBeInTheDocument()
+    expect(screen.getByText(/send\.taker_failure\.md0_no_merge/)).toBeInTheDocument()
+    expect(screen.getByText('send.taker_failure.no_funds_moved')).toBeInTheDocument()
+    expect(screen.queryByText('send.alert_collaborative_stopped_title')).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'global.done' }))
+    expect(mocks.clearCurrentPaymentAttempt).toHaveBeenCalled()
+  })
+
+  it('JoinBlaket: shows the txid when the daemon reports the CoinJoin complete', async () => {
+    mocks.currentPaymentAttemptPresent = true
+    mocks.takerStatus = { running: false, status: 'complete', txid: 'ab'.repeat(32) }
+
+    render(<SendPage walletFileName="wallet.jmdat" />)
+
+    expect(screen.getByTestId('collaborative-send-complete')).toBeInTheDocument()
+    expect(screen.getByText('ab'.repeat(32))).toBeInTheDocument()
+    await flushActUpdates()
+  })
+
+  it('JoinBlaket: keeps the neutral alert while the outcome is not final', async () => {
+    mocks.currentPaymentAttemptPresent = true
+    mocks.takerStatus = { running: true, status: null }
+
+    render(<SendPage walletFileName="wallet.jmdat" />)
+
+    expect(screen.getByText('send.alert_collaborative_stopped_title')).toBeInTheDocument()
+    await flushActUpdates()
   })
 
   it('handles errors loading minimum makers config', async () => {

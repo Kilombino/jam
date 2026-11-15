@@ -11,14 +11,18 @@ const ensureInteger = (value: unknown, message: string): number => {
   return value
 }
 
-const txFeeValueForRequest = (data: SendFormValues): number | undefined => {
-  if (data.txFee.txFeeUnit === TX_FEE_UNITS.BLOCKS && data.txFee.txFeeInBlocks !== undefined) {
-    return data.txFee.txFeeInBlocks
-  } else if (data.txFee.txFeeUnit === TX_FEE_UNITS.SATS_PER_VBYTE && data.txFee.txFeeInSatsPerVbyte !== undefined) {
-    return Math.ceil(data.txFee.txFeeInSatsPerVbyte * 1_000)
+/** The `txfee` request value (block target, or sat/kvB) for a fee form value. */
+export const txFeeRequestValue = (txFee: Partial<SendFormValues['txFee']> | undefined): number | undefined => {
+  if (txFee === undefined) return undefined
+  if (txFee.txFeeUnit === TX_FEE_UNITS.BLOCKS && txFee.txFeeInBlocks !== undefined) {
+    return txFee.txFeeInBlocks
+  } else if (txFee.txFeeUnit === TX_FEE_UNITS.SATS_PER_VBYTE && txFee.txFeeInSatsPerVbyte !== undefined) {
+    return Math.ceil(txFee.txFeeInSatsPerVbyte * 1_000)
   }
   return undefined
 }
+
+const txFeeValueForRequest = (data: SendFormValues): number | undefined => txFeeRequestValue(data.txFee)
 
 export const buildNonCollaborativeSendRequest = (data: SendFormValues): DirectSendRequest => {
   if (data.amount === undefined) {

@@ -28,10 +28,12 @@ import { useFeeConfigValidation } from '@/hooks/useFeeConfigValidation'
 import { useJmConfig } from '@/hooks/useJmConfig'
 import type { UtxoId } from '@/hooks/useQueryUtxos'
 import { useRefreshSession } from '@/hooks/useRefreshSession'
+import { useTakerStatus } from '@/hooks/useTakerOutcome'
 import { useUtxoSelectionDialog } from '@/hooks/useUtxoSelectionDialog'
 import { getErrorReason } from '@/lib/errorReason'
 import * as fb from '@/lib/fidelityBondUtils'
 import { withMutationDelay } from '@/lib/queryClient'
+import { isTerminalTakerStatus } from '@/lib/takerOutcome'
 import { cn, delayedPromise, scrollIntoView, type WalletFileName } from '@/lib/utils'
 import { useDeveloperMode } from '@/store/jamSettingsStore'
 import { jmTxStore, type JmTxInfo } from '@/store/jmTxStore'
@@ -40,6 +42,7 @@ import { Button } from '../ui/button'
 import { Card, CardContent } from '../ui/card'
 import { Spinner } from '../ui/spinner'
 import { ActiveCollaborativeSendAlert } from './ActiveCollaborativeSendAlert'
+import { CollaborativeSendOutcomeAlert } from './CollaborativeSendOutcomeAlert'
 import { PaymentAbortDialog } from './PaymentAbortDialog'
 import PaymentConfirmDialog from './PaymentConfirmDialog'
 import { SendForm } from './SendForm'
@@ -222,6 +225,23 @@ export const SendPage = ({ walletFileName }: SendPageProps) => {
       startCoinjoinMutationReset()
     }
   }, [takerRunning, startCoinjoinMutationIsSuccess, startCoinjoinMutationReset])
+
+  // JoinBlaket: the daemon's own verdict on the attempt (GET /taker/status),
+  // with the reason when it failed. Also catches a CoinJoin that failed before
+  // the session ever reported it as running (otherwise "starting" forever).
+  const coinjoinAttemptActive = currentPaymentAttempt?.data.isCoinJoin === true
+  const takerStatusQuery = useTakerStatus(
+    walletFileName,
+    currentPaymentAttempt?.createdAt,
+    coinjoinAttemptActive && !takerRunning,
+  )
+  const takerOutcome = isTerminalTakerStatus(takerStatusQuery.data) ? takerStatusQuery.data : undefined
+
+  useEffect(() => {
+    if (takerOutcome !== undefined && startCoinjoinMutationIsSuccess && !takerRunning) {
+      startCoinjoinMutationReset()
+    }
+  }, [takerOutcome, takerRunning, startCoinjoinMutationIsSuccess, startCoinjoinMutationReset])
 
   useEffect(() => {
     if (!takerRunning && stopCoinjoinMutationIsSuccess) {
@@ -451,7 +471,15 @@ export const SendPage = ({ walletFileName }: SendPageProps) => {
            */
           currentPaymentAttempt?.data.isCoinJoin === true && !isWaitingCoinjoinStart && takerRunning === false && (
             <>
-              {walletInfoIsFetching ? (
+              {takerOutcome !== undefined && takerOutcome.status !== 'cancelled' ? (
+                <CollaborativeSendOutcomeAlert
+                  status={takerOutcome}
+                  onDone={() => {
+                    setFormId((current) => current + 1)
+                    clearCurrentPaymentAttempt()
+                  }}
+                />
+              ) : walletInfoIsFetching ? (
                 <>
                   <Alert variant="default" className="motion-safe:animate-in blur-in my-2">
                     <Spinner className="motion-reduce:hidden" />

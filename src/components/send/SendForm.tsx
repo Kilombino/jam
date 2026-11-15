@@ -15,10 +15,12 @@ import { JM_MINIMUM_MAKERS_DEFAULT, JM_TAKER_UTXO_AGE } from '@/constants/jm'
 import { useDetectNetwork, type AddressSummary, type Jar } from '@/context/JamWalletInfoContext'
 import { useApiClient } from '@/hooks/useApiClient'
 import { useQueryOrderbook } from '@/hooks/useQueryOrderbook'
+import { useMaxCoinjoin } from '@/hooks/useTakerOutcome'
 import type { BalanceSummary } from '@/lib/balanceSummary'
 import { parseBip21Uri, type Bip21ParseResult } from '@/lib/bip21'
 import type { JamFeeConfigValues } from '@/lib/feeConfig'
 import * as fb from '@/lib/fidelityBondUtils'
+import { maxCoinjoinVerdict } from '@/lib/takerOutcome'
 import { cn, delayedPromise, factorToPercentage, type WalletFileName } from '@/lib/utils'
 import type { BitcoinAddress, JarIndex } from '@/types/global'
 import { DevBadge } from '../dev/DevBadge'
@@ -40,6 +42,7 @@ import { SliderWithInput } from '../ui/jam/SliderWithInput'
 import { Spinner } from '../ui/spinner'
 import { Switch } from '../ui/switch'
 import JarSelectorDialog from './JarSelectorDialog'
+import { MaxCoinjoinHint } from './MaxCoinjoinHint'
 import { SendCoinjoinPreconditionAlert } from './SendCoinjoinPreconditionAlert'
 import {
   createSendFormSchema,
@@ -49,6 +52,7 @@ import {
   toSendFormDefaultValues,
 } from './SendForm.schema'
 import { TxFeeForm } from './TxFeeForm'
+import { txFeeRequestValue } from './collaborativeSend'
 import { estimateMaxCollaboratorFee } from './feeEstimate'
 import type { SendFormValues } from './types'
 
@@ -260,6 +264,29 @@ export function SendForm({
       return undefined
     }
   }, [amountForFeeEstimate, feeConfigValues, isCoinJoin, values.numCollaborators])
+
+  // JoinBlaket: the largest amount one CoinJoin can send from the source jar,
+  // computed by jmwalletd with the taker's own rules (GET /taker/max-coinjoin).
+  const sourceJarUtxoKey = useMemo(
+    () =>
+      (sourceJar?.utxos ?? [])
+        .map((utxo) => `${utxo.utxo}:${utxo.frozen ? 1 : 0}:${Math.min(utxo.confirmations, 100)}`)
+        .join(','),
+    [sourceJar],
+  )
+  const maxCoinjoinQuery = useMaxCoinjoin(
+    walletFileName,
+    {
+      mixdepth: sourceJarIndex,
+      counterparties: values.numCollaborators,
+      txfee: txFeeRequestValue(values.txFee),
+      utxoKey: sourceJarUtxoKey,
+    },
+    isCoinJoin === true && isSweep !== true && sourceJar !== undefined && !disabled,
+  )
+  const maxCoinjoin = isCoinJoin === true && isSweep !== true ? maxCoinjoinQuery.data : undefined
+  const amountAsNumber = values.amount?.amount === undefined ? undefined : Number(values.amount.amount)
+  const amountTooLargeForCoinjoin = maxCoinjoinVerdict(maxCoinjoin, amountAsNumber) === 'too_much'
 
   const doOnSubmit = handleSubmit(onSubmit)
 
@@ -583,6 +610,9 @@ export function SendForm({
               ) : null}
               {errors.amount?.sweepUtxos?.message ? <FieldError>{errors.amount.sweepUtxos.message}</FieldError> : null}
               {errors.amount?.isSweep?.message ? <FieldError>{errors.amount.isSweep.message}</FieldError> : null}
+              {maxCoinjoin && sourceJar && (
+                <MaxCoinjoinHint data={maxCoinjoin} amount={amountAsNumber} jarName={sourceJar.name} />
+              )}
             </Field>
           </div>
 
@@ -693,7 +723,7 @@ export function SendForm({
                     ? 'secondary'
                     : undefined
             }
-            disabled={disabled || isSubmitting}
+            disabled={disabled || isSubmitting || amountTooLargeForCoinjoin}
             className="w-full"
             size="xxl"
           >

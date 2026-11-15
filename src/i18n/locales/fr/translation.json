@@ -186,7 +186,37 @@
     "button_send": "Envoyer",
     "text_sending": "Envoi de ",
     "button_sweep": "Balayer",
-    "button_clear_sweep": "Effacer"
+    "button_clear_sweep": "Effacer",
+    "taker_failure": {
+      "title": "Le CoinJoin n'a pas eu lieu",
+      "title_complete": "CoinJoin envoyé",
+      "no_funds_moved": "Rien n'a été envoyé et aucun fonds n'a bougé.",
+      "md0_no_merge": "Vous avez demandé {{needed}} sats, mais ce pot ne combine pas les pièces qui ne viennent pas d'un CoinJoin (pour votre confidentialité), et votre plus grosse pièce contient {{largest}} sats.",
+      "md0_no_merge_fees": "{{amount}} sats plus environ {{fees}} sats de frais ne tiennent pas dans une seule pièce.",
+      "hint_send_less_or_consolidate": "Envoyez moins (un CoinJoin peut dépenser au plus {{max}} sats de ce pot, frais compris) ou consolidez d'abord : envoyez-vous les pièces sans CoinJoin, attendez les confirmations puis réessayez.",
+      "hint_confirmations": "Certaines pièces sont encore jeunes : le CoinJoin n'utilise que des pièces avec au moins {{confirmations}} confirmations. Attendre d'autres blocs aidera.",
+      "insufficient_funds": "Pas assez de pièces pour ce CoinJoin : il faut {{needed}} sats et le pot peut utiliser {{available}} sats.",
+      "unconfirmed_funds": "Pas assez de pièces confirmées : il faut {{needed}} sats, {{available}} sats sont utilisables et {{unconfirmed}} sats sont encore trop jeunes.",
+      "no_eligible_utxos": "Aucune pièce du pot #{{jar}} ne peut servir à un CoinJoin pour l'instant.",
+      "hint_no_eligible_utxos": "Les pièces doivent avoir au moins {{confirmations}} confirmations et ne pas être gelées ; les fidelity bonds ne sont jamais utilisés.",
+      "podle_utxo_too_small": "Aucune de vos pièces n'est assez grosse pour ouvrir ce CoinJoin : une pièce doit contenir au moins {{needed}} sats ({{percent}} % du montant).",
+      "hint_podle": "Envoyez moins ou utilisez un pot avec une plus grosse pièce.",
+      "not_enough_offers": "Pas assez de makers sur le marché : {{found}} trouvés, au moins {{minimum}} nécessaires.",
+      "not_enough_makers": "Pas assez de makers adaptés : {{found}} trouvés, au moins {{minimum}} nécessaires.",
+      "not_enough_makers_bond": "Pas assez de makers avec fidelity bond : {{found}} trouvés, au moins {{minimum}} nécessaires.",
+      "hint_try_later": "Réessayez plus tard ou demandez moins de collaborateurs.",
+      "hint_fee_limits": "Les makers qui demandent plus que vos limites de frais sont ignorés : vérifiez les limites de frais dans les paramètres ou réessayez plus tard.",
+      "other": "Raison indiquée par JoinBlaket : {{reason}}"
+    },
+    "max_coinjoin": {
+      "label": "Maximum en un CoinJoin depuis {{jar}} :",
+      "md0_no_merge": "Ce pot ne combine pas les pièces qui ne viennent pas d'un CoinJoin (confidentialité) : un CoinJoin peut dépenser au plus votre plus grosse pièce ({{largest}} sur {{total}} sats), moins les frais.",
+      "podle": "Une pièce doit contenir au moins un cinquième du montant pour ouvrir le CoinJoin.",
+      "immature": "{{amount}} sats ne comptent pas encore : il leur faut {{confirmations}} confirmations.",
+      "too_much": "Trop pour un CoinJoin depuis ce pot : envoyez au plus {{max}} sats.",
+      "too_much_md0": "Trop pour un CoinJoin depuis ce pot (les pièces non mélangées ne sont pas combinées) : envoyez au plus {{max}} sats ou consolidez d'abord en vous envoyant les pièces sans CoinJoin.",
+      "near_limit": "Proche de la limite : avec les frais de minage (environ {{fee}} sats) et ceux des makers, cela peut ne pas passer. Jusqu'à {{max}} sats, c'est sûr."
+    }
   },
   "receive": {
     "title": "Recevoir",

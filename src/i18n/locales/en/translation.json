@@ -581,6 +581,36 @@
       "nested_hint_wait_for_block_other": "Select another jar to send from or wait for {{ count }} more blocks.",
       "nested_hint_fund_jar": "Select another jar to send from or fund this jar and wait for one block.",
       "nested_hint_fund_jar_other": "Select another jar to send from or fund this jar and wait for {{ count }} blocks."
+    },
+    "taker_failure": {
+      "title": "The CoinJoin did not happen",
+      "title_complete": "CoinJoin sent",
+      "no_funds_moved": "Nothing was sent and no funds moved.",
+      "md0_no_merge": "You asked for {{needed}} sats, but this jar does not combine coins that did not come from a CoinJoin (for your privacy), and your largest single coin has {{largest}} sats.",
+      "md0_no_merge_fees": "{{amount}} sats plus about {{fees}} sats of fees do not fit in one coin.",
+      "hint_send_less_or_consolidate": "Send less (one CoinJoin can spend at most {{max}} sats from this jar, fees included), or consolidate first: send the coins to yourself without CoinJoin, wait for confirmations, then try again.",
+      "hint_confirmations": "Some coins are still young: CoinJoin only uses coins with at least {{confirmations}} confirmations. Waiting for more blocks will help.",
+      "insufficient_funds": "Not enough coins for this CoinJoin: it needs {{needed}} sats and the jar can use {{available}} sats.",
+      "unconfirmed_funds": "Not enough confirmed coins: it needs {{needed}} sats, {{available}} sats are usable and {{unconfirmed}} sats are still too young.",
+      "no_eligible_utxos": "No coin in jar #{{jar}} can be used for a CoinJoin right now.",
+      "hint_no_eligible_utxos": "Coins need at least {{confirmations}} confirmations, must not be frozen, and fidelity bonds are never used.",
+      "podle_utxo_too_small": "None of your coins is big enough to open this CoinJoin: one coin must hold at least {{needed}} sats ({{percent}}% of the amount).",
+      "hint_podle": "Send less, or use a jar with a bigger coin.",
+      "not_enough_offers": "Not enough makers in the market: found {{found}}, at least {{minimum}} needed.",
+      "not_enough_makers": "Not enough suitable makers: found {{found}}, at least {{minimum}} needed.",
+      "not_enough_makers_bond": "Not enough makers with a fidelity bond: found {{found}}, at least {{minimum}} needed.",
+      "hint_try_later": "Try again later, or ask for fewer collaborators.",
+      "hint_fee_limits": "Makers asking more than your fee limits are skipped: check Settings › Fee limits, or try again later.",
+      "other": "Reason reported by JoinBlaket: {{reason}}"
+    },
+    "max_coinjoin": {
+      "label": "Max in one CoinJoin from {{jar}}:",
+      "md0_no_merge": "This jar does not combine coins that did not come from a CoinJoin (for your privacy): one CoinJoin can spend at most your largest single coin ({{largest}} of {{total}} sats), minus fees.",
+      "podle": "One coin must hold at least a fifth of the amount to open the CoinJoin.",
+      "immature": "{{amount}} sats are not counted yet: they need {{confirmations}} confirmations.",
+      "too_much": "Too much for one CoinJoin from this jar: send at most {{max}} sats.",
+      "too_much_md0": "Too much for one CoinJoin from this jar (unmixed coins are not combined): send at most {{max}} sats, or consolidate first by sending the coins to yourself without CoinJoin.",
+      "near_limit": "Close to the limit: with the mining fee (about {{fee}} sats) and the makers' fees this may not fit. Up to {{max}} sats is safe."
     }
   },
   "receive": {

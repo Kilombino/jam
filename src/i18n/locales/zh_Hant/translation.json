@@ -307,6 +307,36 @@
       "nested_hint_wait_for_block_other": "選擇另一個罐子作為來源或者再等{{ count }}個區塊。",
       "nested_hint_fund_jar": "選擇另一個罐子作為來源或者充值這個罐子並再等一個區塊。",
       "nested_hint_fund_jar_other": "選擇另一個罐子作為來源或者充值這個罐子並再等{{ count }}個區塊。"
+    },
+    "taker_failure": {
+      "title": "CoinJoin 未完成",
+      "title_complete": "CoinJoin 已傳送",
+      "no_funds_moved": "沒有傳送任何內容，資金未移動。",
+      "md0_no_merge": "你請求了 {{needed}} sats，但為保護你的隱私，此罐子不會合併非 CoinJoin 來源的幣，而你最大的單一幣只有 {{largest}} sats。",
+      "md0_no_merge_fees": "{{amount}} sats 加上約 {{fees}} sats 手續費無法放進一個幣。",
+      "hint_send_less_or_consolidate": "少傳一些（一次 CoinJoin 最多可從此罐子花費 {{max}} sats，含手續費），或先合併：不使用 CoinJoin 把幣傳給自己，等待確認後再試。",
+      "hint_confirmations": "部分幣還太新：CoinJoin 只使用至少有 {{confirmations}} 個確認的幣。等待更多區塊會有幫助。",
+      "insufficient_funds": "幣不足以完成此 CoinJoin：需要 {{needed}} sats，罐子可用 {{available}} sats。",
+      "unconfirmed_funds": "已確認的幣不足：需要 {{needed}} sats，可用 {{available}} sats，另有 {{unconfirmed}} sats 還太新。",
+      "no_eligible_utxos": "罐子 #{{jar}} 中目前沒有可用於 CoinJoin 的幣。",
+      "hint_no_eligible_utxos": "幣需要至少 {{confirmations}} 個確認且未被凍結；忠誠保證金永遠不會被使用。",
+      "podle_utxo_too_small": "你沒有足夠大的幣來發起此 CoinJoin：需要一個至少 {{needed}} sats 的幣（金額的 {{percent}}%）。",
+      "hint_podle": "少傳一些，或使用有更大幣的罐子。",
+      "not_enough_offers": "市場上的 maker 不足：找到 {{found}} 個，至少需要 {{minimum}} 個。",
+      "not_enough_makers": "合適的 maker 不足：找到 {{found}} 個，至少需要 {{minimum}} 個。",
+      "not_enough_makers_bond": "有忠誠保證金的 maker 不足：找到 {{found}} 個，至少需要 {{minimum}} 個。",
+      "hint_try_later": "稍後再試，或請求更少的協作者。",
+      "hint_fee_limits": "要價超過你手續費上限的 maker 會被跳過：請在設定中檢查手續費上限，或稍後再試。",
+      "other": "JoinBlaket 回報的原因：{{reason}}"
+    },
+    "max_coinjoin": {
+      "label": "從 {{jar}} 一次 CoinJoin 的最大金額：",
+      "md0_no_merge": "此罐子不合併非 CoinJoin 來源的幣（隱私）：一次 CoinJoin 最多花費你最大的單一幣（{{total}} sats 中的 {{largest}} sats），再減去手續費。",
+      "podle": "發起 CoinJoin 需要一個至少為金額五分之一的幣。",
+      "immature": "{{amount}} sats 暫不計入：需要 {{confirmations}} 個確認。",
+      "too_much": "超出此罐子一次 CoinJoin 的上限：最多傳送 {{max}} sats。",
+      "too_much_md0": "超出此罐子一次 CoinJoin 的上限（未混合的幣不會合併）：最多傳送 {{max}} sats，或先不使用 CoinJoin 把幣傳給自己進行合併。",
+      "near_limit": "接近上限：加上礦工費（約 {{fee}} sats）和 maker 手續費可能不夠。{{max}} sats 以內是安全的。"
     }
   },
   "receive": {

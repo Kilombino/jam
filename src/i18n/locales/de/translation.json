@@ -307,6 +307,36 @@
       "nested_hint_wait_for_block_other": "Wähle ein anderes Glas für die Transaktion oder warte auf {{ count }} mehr Blöcke.",
       "nested_hint_fund_jar": "Wähle ein anderes Glas für die Transaktion oder warte auf einen weiteren Block. ",
       "nested_hint_fund_jar_other": "Wähle ein anderes Glas für die Transaktion oder warte auf {{ count }} weitere Blöcke."
+    },
+    "taker_failure": {
+      "title": "Der CoinJoin hat nicht stattgefunden",
+      "title_complete": "CoinJoin gesendet",
+      "no_funds_moved": "Es wurde nichts gesendet und kein Guthaben bewegt.",
+      "md0_no_merge": "Du hast {{needed}} sats angefordert, aber dieses Glas kombiniert keine Münzen, die nicht aus einem CoinJoin stammen (zum Schutz deiner Privatsphäre), und deine größte einzelne Münze hat {{largest}} sats.",
+      "md0_no_merge_fees": "{{amount}} sats plus etwa {{fees}} sats Gebühren passen nicht in eine Münze.",
+      "hint_send_less_or_consolidate": "Sende weniger (ein CoinJoin kann aus diesem Glas höchstens {{max}} sats ausgeben, Gebühren inklusive) oder konsolidiere zuerst: sende die Münzen ohne CoinJoin an dich selbst, warte auf Bestätigungen und versuche es erneut.",
+      "hint_confirmations": "Einige Münzen sind noch jung: CoinJoin nutzt nur Münzen mit mindestens {{confirmations}} Bestätigungen. Auf weitere Blöcke zu warten hilft.",
+      "insufficient_funds": "Nicht genug Münzen für diesen CoinJoin: benötigt {{needed}} sats, das Glas kann {{available}} sats nutzen.",
+      "unconfirmed_funds": "Nicht genug bestätigte Münzen: benötigt {{needed}} sats, {{available}} sats sind nutzbar und {{unconfirmed}} sats sind noch zu jung.",
+      "no_eligible_utxos": "Keine Münze in Glas #{{jar}} kann gerade für einen CoinJoin genutzt werden.",
+      "hint_no_eligible_utxos": "Münzen brauchen mindestens {{confirmations}} Bestätigungen und dürfen nicht eingefroren sein; Fidelity Bonds werden nie verwendet.",
+      "podle_utxo_too_small": "Keine deiner Münzen ist groß genug, um diesen CoinJoin zu eröffnen: eine Münze muss mindestens {{needed}} sats enthalten ({{percent}} % des Betrags).",
+      "hint_podle": "Sende weniger oder nutze ein Glas mit einer größeren Münze.",
+      "not_enough_offers": "Nicht genug Maker im Markt: {{found}} gefunden, mindestens {{minimum}} nötig.",
+      "not_enough_makers": "Nicht genug passende Maker: {{found}} gefunden, mindestens {{minimum}} nötig.",
+      "not_enough_makers_bond": "Nicht genug Maker mit Fidelity Bond: {{found}} gefunden, mindestens {{minimum}} nötig.",
+      "hint_try_later": "Versuche es später erneut oder fordere weniger Mitwirkende an.",
+      "hint_fee_limits": "Maker, die mehr als deine Gebührenlimits verlangen, werden übersprungen: prüfe die Gebührenlimits in den Einstellungen oder versuche es später.",
+      "other": "Von JoinBlaket gemeldeter Grund: {{reason}}"
+    },
+    "max_coinjoin": {
+      "label": "Maximum in einem CoinJoin aus {{jar}}:",
+      "md0_no_merge": "Dieses Glas kombiniert keine Münzen, die nicht aus einem CoinJoin stammen (Privatsphäre): ein CoinJoin kann höchstens deine größte einzelne Münze ausgeben ({{largest}} von {{total}} sats), abzüglich Gebühren.",
+      "podle": "Eine Münze muss mindestens ein Fünftel des Betrags enthalten, um den CoinJoin zu eröffnen.",
+      "immature": "{{amount}} sats zählen noch nicht: sie brauchen {{confirmations}} Bestätigungen.",
+      "too_much": "Zu viel für einen CoinJoin aus diesem Glas: sende höchstens {{max}} sats.",
+      "too_much_md0": "Zu viel für einen CoinJoin aus diesem Glas (ungemischte Münzen werden nicht kombiniert): sende höchstens {{max}} sats oder konsolidiere zuerst, indem du die Münzen ohne CoinJoin an dich selbst sendest.",
+      "near_limit": "Nahe am Limit: mit der Mining-Gebühr (etwa {{fee}} sats) und den Maker-Gebühren passt es eventuell nicht. Bis {{max}} sats ist sicher."
     }
   },
   "receive": {
