@@ -459,6 +459,7 @@
       "create_form": {
         "confirmation_toggle_title": "Ich habe meine Eingaben sorgfältig überprüft",
         "confirmation_toggle_subtitle": "Ich verstehe, dass gesperrte Gelder für den Zeitraum der Sperre nicht ausgegeben werden können",
+        "hint_additional": "Bonds addieren sich nicht: Dein Angebot bewirbt nur einen, den mit dem höchsten Wert. Ein weiterer Bond hilft nur, wenn er mehr wert ist als der aktuelle.",
         "button_create": "Fidelity Bond erstellen"
       },
       "existing": {

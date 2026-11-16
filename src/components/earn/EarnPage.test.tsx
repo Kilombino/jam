@@ -558,6 +558,40 @@ describe('EarnPage', () => {
     expect(screen.getByText('renew-bond-dialog:true')).toBeInTheDocument()
   })
 
+  it('allows creating an additional fidelity bond next to an existing one', async () => {
+    const user = userEvent.setup()
+    mocks.walletInfo.fidelityBondSummary = { fbOutputs: [expiredBond] }
+
+    render(<EarnPage walletFileName="wallet.jmdat" />)
+
+    expect(screen.getByText('fidelity-bond:bond-tx:0')).toBeInTheDocument()
+    expect(screen.getByText('earn.fidelity_bond.create_form.hint_additional')).toBeInTheDocument()
+
+    const createFidelityBondButton = screen.getByRole('button', {
+      name: 'earn.fidelity_bond.create_form.button_create',
+    })
+    expect(createFidelityBondButton).toBeEnabled()
+
+    await user.click(createFidelityBondButton)
+    expect(screen.getByText('create-bond-dialog:true')).toBeInTheDocument()
+  })
+
+  it('keeps creating an additional fidelity bond disabled while the maker is running', () => {
+    mocks.walletInfo.fidelityBondSummary = { fbOutputs: [expiredBond] }
+    setSession({
+      maker_running: true,
+      offer_list: [{ cjfee: '250', minsize: '5000', ordertype: 'sw0absoffer' }],
+    })
+
+    render(<EarnPage walletFileName="wallet.jmdat" />)
+
+    expect(
+      screen.getByRole('button', {
+        name: 'earn.fidelity_bond.create_form.button_create',
+      }),
+    ).toBeDisabled()
+  })
+
   it('disables fidelity bond actions on existing fidelity bond when rescanning is active', async () => {
     const user = userEvent.setup()
     mocks.walletInfo.fidelityBondSummary = { fbOutputs: [expiredBond] }

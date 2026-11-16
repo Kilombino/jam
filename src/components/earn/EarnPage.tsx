@@ -15,7 +15,6 @@ import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader,
 import { FeeConfigErrorAlert } from '@/components/ui/jam/FeeConfigErrorAlert'
 import { PageLoading } from '@/components/ui/jam/PageLoading'
 import PageTitle from '@/components/ui/jam/PageTitle'
-import { isDevMode } from '@/constants/debugFeatures'
 import * as JAM from '@/constants/jam'
 import { OFFERTYPE_ABS } from '@/constants/jm'
 import { routes } from '@/constants/routes'
@@ -71,7 +70,8 @@ interface EarnPageProps {
   walletFileName: WalletFileName
 }
 
-const JAM_EARN_CREATE_MULTIPLE_FIDELITY_BONDS_ENABLED = isDevMode()
+// xbt: a maker with a bond may want another one (bigger, or with a later lock date) before the first expires
+const JAM_EARN_CREATE_MULTIPLE_FIDELITY_BONDS_ENABLED = true
 
 export const EarnPage = ({ walletFileName }: EarnPageProps) => {
   const { t } = useTranslation()
@@ -456,7 +456,7 @@ export const EarnPage = ({ walletFileName }: EarnPageProps) => {
           </div>
 
           {showCreateAdditionalFidelityBond && (
-            <div className="mt-2 flex items-center gap-2">
+            <div className="mt-4 space-y-2">
               <Button
                 variant="outline"
                 disabled={!isCreateFidelityBondEnabled}
@@ -465,7 +465,7 @@ export const EarnPage = ({ walletFileName }: EarnPageProps) => {
                 <PlusIcon />
                 {t('earn.fidelity_bond.create_form.button_create')}
               </Button>
-              <DevBadge />
+              <p className="text-muted-foreground text-sm">{t('earn.fidelity_bond.create_form.hint_additional')}</p>
             </div>
           )}
         </div>

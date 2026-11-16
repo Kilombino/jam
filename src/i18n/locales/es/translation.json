@@ -822,6 +822,7 @@
         "confirmation_toggle_subtitle": "Entiendo que los fondos bloqueados serán inaccesibles durante el periodo indicado",
         "alert_no_eligible_utxos_title": "No hay UTXOs aptos",
         "alert_no_eligible_utxos_description": "Un bono de fidelidad necesita una moneda de tu cartera que no esté congelada. <1>Recibe fondos</1> o <3>descongela una moneda</3> para continuar.",
+        "hint_additional": "Los bonos no se suman: tu oferta anuncia solo uno, el de mayor valor. Otro bono solo te sirve si vale más que el actual.",
         "button_create": "Crear bono de fidelidad"
       },
       "existing": {
