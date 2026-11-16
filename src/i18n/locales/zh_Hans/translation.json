@@ -459,6 +459,7 @@
       "create_form": {
         "confirmation_toggle_title": "我已仔细检查了我的输入",
         "confirmation_toggle_subtitle": "我了解锁定的资金在给定的期限内将无法使用",
+        "hint_additional": "保证金不会累加：你的报价只公布其中价值最高的一个。只有当新的保证金价值高于现有的，才有帮助。",
         "button_create": "创建保证金"
       },
       "existing": {

@@ -418,6 +418,7 @@
       "create_form": {
         "confirmation_toggle_title": "Eu revisei minhas entradas cuidadosamente",
         "confirmation_toggle_subtitle": "Entendo que os fundos bloqueados ficarão inacessíveis durante o período determinado",
+        "hint_additional": "Os títulos não se somam: sua oferta anuncia apenas um, o de maior valor. Outro título só ajuda se valer mais que o atual.",
         "button_create": "Criar título de fidelidade"
       },
       "existing": {

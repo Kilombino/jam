@@ -459,6 +459,7 @@
       "create_form": {
         "confirmation_toggle_title": "我已經仔細檢查了我的輸入",
         "confirmation_toggle_subtitle": "我了解鎖定的資金在給定的期限內將無法使用",
+        "hint_additional": "保證金不會累加：你的報價只公布其中價值最高的一個。只有當新的保證金價值高於現有的，才有幫助。",
         "button_create": "創建保證金"
       },
       "existing": {

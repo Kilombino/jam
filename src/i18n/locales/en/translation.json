@@ -806,6 +806,7 @@
         "confirmation_toggle_subtitle": "I understand that the locked funds will be inaccessible for the given duration",
         "alert_no_eligible_utxos_title": "No eligible UTXOs",
         "alert_no_eligible_utxos_description": "A fidelity bond needs a coin in your wallet that is not frozen. <1>Receive funds</1> or <3>unfreeze a coin</3> to continue.",
+        "hint_additional": "Bonds do not add up: your offer advertises only one, the one with the highest value. Another bond only helps if it is worth more than the current one.",
         "button_create": "Create Fidelity Bond"
       },
       "existing": {

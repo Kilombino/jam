@@ -418,6 +418,7 @@
       "create_form": {
         "confirmation_toggle_title": "Ho ricontrollato i miei inputs con attenzione",
         "confirmation_toggle_subtitle": "Sono consapevole che i fondi bloccati saranno inaccessibili per la durata indicata.",
+        "hint_additional": "I bond non si sommano: la tua offerta ne annuncia solo uno, quello di valore più alto. Un altro bond serve solo se vale più di quello attuale.",
         "button_create": "Crea Fidelity Bond"
       },
       "existing": {
